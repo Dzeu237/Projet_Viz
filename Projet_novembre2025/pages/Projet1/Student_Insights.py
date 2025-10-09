@@ -1,10 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-
-if st.button("← Retour aux projets"):
-        st.session_state.current_project = None
-        st.rerun()
     
 st.markdown('<h1 class="section-title">📊 Dashboard Student Performance Insights</h1>', unsafe_allow_html=True)
 st.markdown("*Septembre 2024*")
