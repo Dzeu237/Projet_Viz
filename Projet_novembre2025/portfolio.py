@@ -9,10 +9,37 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-
+current_page= 'home' if 'current_page' not in st.session_state else st.session_state.current_page
 # CSS personnalisé pour un design épuré et professionnel
 st.markdown("""
 <style>
+    /* Cacher la sidebar par défaut */
+    [data-testid="stSidebar"] {
+        display: none;
+    }
+    
+    /* Navigation horizontale */
+    .navbar {
+        background: linear-gradient(90deg, #2E3192 0%, #1BFFFF 100%);
+        padding: 5rem 10rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 1rem 1rem 2rem -1rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-brand {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: white;
+    }
+    
+    .navbar-links {
+        display: flex;
+        gap: 1rem;
+    }
+    
     .main-header {
         font-size: 3.5rem;
         font-weight: 700;
@@ -28,7 +55,7 @@ st.markdown("""
     }
     .project-card {
         background: white;
-        padding: 2rem;
+    
         border-radius: 10px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         margin-bottom: 1.5rem;
@@ -38,7 +65,7 @@ st.markdown("""
     .skill-badge {
         display: inline-block;
         background: #f0f2f6;
-        padding: 0.3rem 0.8rem;
+   
         border-radius: 20px;
         margin: 0.2rem;
         font-size: 0.9rem;
@@ -47,7 +74,7 @@ st.markdown("""
     }
     .stat-box {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 1.5rem;
+    
         border-radius: 10px;
         color: white;
         text-align: center;
@@ -65,50 +92,79 @@ st.markdown("""
         margin-bottom: 1rem;
         border-bottom: 3px solid #1BFFFF;
         display: inline-block;
-        padding-bottom: 0.5rem;
+    
     }
     .stButton>button {
         width: 100%;
     }
+    
+    /* Réduire l'espace en haut */
+    .block-container {
+        padding-top: 5rem;
+    }
 </style>
 """, unsafe_allow_html=True)
 
-# Sidebar Navigation
-with st.sidebar:
-    st.image("https://via.placeholder.com/150", width=150)
-    st.markdown("### 🎯 Navigation")
-    st.session_state.current_page = 'home' if 'current_page' not in st.session_state else st.session_state.current_page
-    # Gestion de la navigation
-    if st.button("🏠 Home", use_container_width=True):
+# Navigation horizontale
+col_nav1, col_nav2, col_nav3, col_nav4, col_nav5, col_nav6 = st.columns([2, 1, 1, 1, 1, 1])
+
+
+
+with col_nav1:
+    st.markdown('<div style="font-size: 1.5rem; font-weight: 700; color: #2E3192; padding: 0.5rem 0;">📊 Portfolio</div>', unsafe_allow_html=True)
+
+with col_nav2:
+    if st.button("🏠 Home", key="nav_home", use_container_width=True):
         st.session_state.current_page = 'home'
-        st.rerun()
-    
-    if st.button("👤 About", use_container_width=True):
+
+
+with col_nav3:
+    if st.button("👤 About", key="nav_about", use_container_width=True):
         st.session_state.current_page = 'about'
-        st.rerun()
-    
-    if st.button("💼 Projects", use_container_width=True):
+
+
+with col_nav4:
+    if st.button("💼 Projects", key="nav_projects", use_container_width=True):
         st.session_state.current_page = 'projects'
-        st.rerun()
-    
-    if st.button("📧 Contact", use_container_width=True):
+
+
+with col_nav5:
+    if st.button("📧 Contact", key="nav_contact", use_container_width=True):
         st.session_state.current_page = 'contact'
-        st.rerun()
-    
-    st.markdown("---")
-    st.markdown("### 📊 Quick Stats")
-    st.metric("Projets Réalisés", "3+")
-    st.metric("Technologies", "15+")
-    st.metric("TOEIC Score", "750/990")
+
+
+with col_nav6:
+    st.markdown(f'<div style="text-align: center; padding: 0.5rem 0; color: #666; font-size: 0.9rem;">Stage Jan 2026</div>', unsafe_allow_html=True)
+
+st.markdown("---")
 
 # ==================== PAGE HOME ====================
 if st.session_state.current_page == 'home':
     # Hero Section
+
+    col1, col2 = st.columns([1, 3])
+
+    with col1:
+        st.markdown("""
+    <div style="text-align: center; padding: 2rem 0;">
+        <img src="Assets/PP.JPG" style="
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #2E3192;
+            box-shadow: 0 8px 20px rgba(46, 49, 146, 0.3);
+        ">
+    </div>
+    """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown('<h1 class="main-header">Claude Dzeugueu</h1>', unsafe_allow_html=True)
+        st.markdown('<p class="sub-header">Data Analyst | Machine Learning Engineer</p>', unsafe_allow_html=True)
+
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        st.markdown('<h1 class="main-header">Claude Dzeugueu</h1>', unsafe_allow_html=True)
-        st.markdown('<p class="sub-header">Data Analyst | Machine Learning Engineer</p>', unsafe_allow_html=True)
         st.markdown("""
         Analyste passionné par la manipulation des données, je recherche des opportunités dans
         le domaine de la data pour participer à des projets porteurs de valeurs, en contribuant

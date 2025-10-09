@@ -52,12 +52,11 @@ def categorize_student(hour):
     else:
         return 'Nerd'
 
-
-
 st.write('La performance des étudiants est un indicateur multidimensionnel qui reflète non seulement les résultats académiques'
          ', mais aussi le développement global de l/apprenant. Cette analyse examine les principaux facteurs'
           ' influençant la réussite scolaire et propose des recommandations pour l/optimisation des résultats.')  
     # Tabs pour organiser l'information
+
 tab1, tab2, tab3, tab4 = st.tabs([ " 🔎Exploration & Transformation","📊 Visualisation","  Analyse", "💻 Tests & Démo"])
 
 with tab1:
@@ -292,18 +291,25 @@ with tab2:
 
     Parental_Involvement=motivation['Parental_Involvement'].value_counts().reset_index(name='Count')
     Peer_Influence=filtred_data['Peer_Influence'].value_counts().to_dict()
-    a,b=st.columns(2)
+    Parental_Education=filtred_data['Parental_Education_Level'].value_counts().to_dict()
+    a,b,c=st.columns(3)
     fig1=go.Figure(data=[
         go.Pie(labels=list(Parental_Involvement['Parental_Involvement']), values=list(Parental_Involvement['Count']), hole=0.6,title={
             'text':'Parental Involvement',
             'font': {'size': 15}})])
     fig2=go.Figure(data=[
+        go.Pie(labels=list(Parental_Education.keys()), values=list(Parental_Education.values()), hole=0.6,title={
+            'text':'Parental Education',
+            'font': {'size': 15}})
+    ])
+    fig3=go.Figure(data=[
         go.Pie(labels=list(Peer_Influence.keys()), values=list(Peer_Influence.values()), hole=0.6,title={
             'text':'Peer Influence',
             'font': {'size': 15}})
     ])
     a.write(fig1)
     b.write(fig2)
+    c.write(fig3)
 
 with tab3:
     st.markdown("Chox de la Target")
