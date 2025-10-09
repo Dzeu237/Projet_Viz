@@ -78,7 +78,7 @@ st.markdown("""
 with st.sidebar:
     st.image("https://via.placeholder.com/150", width=150)
     st.markdown("### 🎯 Navigation")
-    
+    st.session_state.current_page = 'home' if 'current_page' not in st.session_state else st.session_state.current_page
     # Gestion de la navigation
     if st.button("🏠 Home", use_container_width=True):
         st.session_state.current_page = 'home'
@@ -194,28 +194,6 @@ elif st.session_state.current_page == 'about':
     with col2:
         st.markdown("### 🌟 Soft Skills")
         
-        # Radar Chart des soft skills
-        soft_skills = pd.DataFrame({
-            'Compétence': ['Rigueur', 'Esprit Critique', 'Dynamisme', 
-                          'Goût du Défi', 'Curiosité'],
-            'Niveau': [90, 85, 88, 82, 95]
-        })
-        
-        fig = go.Figure(data=go.Scatterpolar(
-            r=soft_skills['Niveau'],
-            theta=soft_skills['Compétence'],
-            fill='toself',
-            line_color='#2E3192',
-            fillcolor='rgba(46, 49, 146, 0.3)'
-        ))
-        
-        fig.update_layout(
-            polar=dict(radialaxis=dict(visible=True, range=[0, 100])),
-            showlegend=False,
-            height=350
-        )
-        
-        st.plotly_chart(fig, use_container_width=True)
         
         st.markdown("### 🌍 Langues")
         st.markdown("🇫🇷 **Français** - Natif")
