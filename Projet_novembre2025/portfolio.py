@@ -9,7 +9,8 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-current_page= 'home' if 'current_page' not in st.session_state else st.session_state.current_page
+st.session_state.current_page='home'
+
 # CSS personnalisé pour un design épuré et professionnel
 st.markdown("""
 <style>
@@ -108,8 +109,6 @@ st.markdown("""
 # Navigation horizontale
 col_nav1, col_nav2, col_nav3, col_nav4, col_nav5, col_nav6 = st.columns([2, 1, 1, 1, 1, 1])
 
-
-
 with col_nav1:
     st.markdown('<div style="font-size: 1.5rem; font-weight: 700; color: #2E3192; padding: 0.5rem 0;">📊 Portfolio</div>', unsafe_allow_html=True)
 
@@ -146,14 +145,14 @@ if st.session_state.current_page == 'home':
 
     with col1:
         st.markdown("""
-    <div style="text-align: center; padding: 2rem 0;">
-        <img src="Assets/PP.JPG" style="
-            width: 180px;
-            height: 180px;
+    <div style="text-align: center; padding: 0.5rem 0;">
+        <img src="https://github.com/Dzeu237/Projet_Viz/blob/main/Projet_novembre2025/Assets/PP.JPG?raw=true" style="
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid #2E3192;
-            box-shadow: 0 8px 20px rgba(46, 49, 146, 0.3);
+            box-shadow: 0 10px 20px rgba(46, 49, 146, 0.3);
         ">
     </div>
     """, unsafe_allow_html=True)
