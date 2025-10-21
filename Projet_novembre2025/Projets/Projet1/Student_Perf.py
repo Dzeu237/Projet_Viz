@@ -312,6 +312,32 @@ with tab2:
     c.write(fig3)
 
 with tab3:
-    st.markdown("Chox de la Target")
-    target_option=st.selectbox(label='Target Variable',options=list(data.columns))
+    st.markdown("Chox de la Variable")
+    target_option=st.selectbox(label='Features',options=list(data.columns))
     st.markdown(f"Vous avez choisi **{target_option}** comme variable cible pour la prédiction.")
+    st.markdown("### Distribution de la Variable Cible")
+    if data[target_option].dtype=='object':
+        target=data[target_option].value_counts().reset_index(name='Count')
+        fig=go.Figure(data=[
+            go.Bar(y=target['Count'], x=target[target_option],text=target['Count'])
+        ])
+        fig.update_xaxes(categoryorder='array', categoryarray=list(target[target_option]))
+        fig.update_layout(title={
+            'text':f'{target_option} Distribution',
+            'y': 0.95,
+            'x': 0.45,
+            'xanchor': 'center',
+            'yanchor': 'top',
+            'font': {'size': 30}})
+        st.write(fig)
+    else:
+        fig=go.Figure()
+        fig.add_trace(go.Histogram(x=data[target_option], nbinsx=20))
+        fig.update_layout(title={
+            'text':f'{target_option} Distribution',
+            'y': 0.95,
+            'x': 0.45,
+            'xanchor': 'center',
+            'yanchor': 'top',
+            'font': {'size': 30}})
+        st.write(fig)

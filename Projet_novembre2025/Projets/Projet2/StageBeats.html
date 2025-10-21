@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StageBeats - Profil Musical & Professionnel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #22c55e, #a855f7);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #22c55e, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .icon-btn:hover {
+            color: white;
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        .profile-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Tabs Navigation */
+        .tabs {
+            display: flex;
+            gap: 16px;
+            margin: 24px 0;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+
+        .tab.active {
+            color: #22c55e;
+            border-bottom-color: #22c55e;
+        }
+
+        .tab:hover {
+            color: white;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Onboarding */
+        .onboarding-container {
+            max-width: 600px;
+            margin: 60px auto;
+        }
+
+        .progress-bar-container {
+            margin-bottom: 32px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #9ca3af;
+        }
+
+        .progress-percent {
+            color: #22c55e;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #374151;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #a855f7);
+            transition: width 0.5s ease;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            padding: 48px;
+        }
+
+        .card h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #9ca3af;
+            margin-bottom: 24px;
+        }
+
+        /* Welcome Step */
+        .welcome-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #22c55e, #a855f7);
+            border-radius: 50%;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .feature-box {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .feature-box p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 999px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #22c55e, #a855f7);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-spotify {
+            background: #22c55e;
+            color: white;
+        }
+
+        .btn-spotify:hover {
+            background: #16a34a;
+        }
+
+        .btn-secondary {
+            background: none;
+            color: #9ca3af;
+            margin-top: 12px;
+        }
+
+        .btn-secondary:hover {
+            color: white;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(55, 65, 81, 0.5);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #a855f7;
+        }
+
+        .form-textarea {
+            resize: none;
+            height: 96px;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 4px;
+        }
+
+        /* Photo Upload */
+        .photo-upload {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .photo-preview {
+            width: 96px;
+            height: 96px;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .upload-info {
+            flex: 1;
+        }
+
+        .btn-upload {
+            background: #7c3aed;
+            color: white;
+            padding: 8px 24px;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .btn-upload:hover {
+            background: #6d28d9;
+        }
+
+        .upload-hint {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        /* Mood Selection */
+        .mood-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .mood-card {
+            padding: 24px;
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            border-radius: 12px;
+            background: rgba(139, 92, 246, 0.1);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .mood-card:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .mood-card.selected {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.2);
+        }
+
+        .mood-icon {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .mood-label {
+            font-weight: 600;
+        }
+
+        .mood-check {
+            margin-top: 8px;
+            color: #22c55e;
+            font-size: 20px;
+            display: none;
+        }
+
+        .mood-card.selected .mood-check {
+            display: block;
+        }
+
+        /* Profile View */
+        .profile-header {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            padding: 48px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 256px;
+            height: 256px;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.1), transparent);
+            filter: blur(60px);
+        }
+
+        .profile-content {
+            position: relative;
+            display: flex;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .profile-pic {
+            width: 128px;
+            height: 128px;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .profile-title {
+            font-size: 18px;
+            color: #9ca3af;
+            margin-bottom: 12px;
+        }
+
+        .profile-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #9ca3af;
+            margin-bottom: 16px;
+        }
+
+        .profile-bio {
+            color: #d1d5db;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .profile-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .stat-badge {
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-badge.music {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .stat-badge.network {
+            background: rgba(168, 85, 247, 0.2);
+            color: #a855f7;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .stat-badge.jobs {
+            background: rgba(236, 72, 153, 0.2);
+            color: #ec4899;
+            border: 1px solid rgba(236, 72, 153, 0.3);
+        }
+
+        .btn-edit {
+            background: #7c3aed;
+            color: white;
+            padding: 8px 24px;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+
+        /* Grid Layout */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .section-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-icon {
+            font-size: 24px;
+        }
+
+        /* Musical DNA */
+        .stat-bars {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-bar {
+            margin-bottom: 16px;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .stat-label {
+            color: #9ca3af;
+        }
+
+        .stat-value {
+            font-weight: 600;
+        }
+
+        .bar {
+            width: 100%;
+            height: 10px;
+            background: #374151;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 1s ease;
+        }
+
+        .bar-fill.energy {
+            background: linear-gradient(90deg, #f97316, #ef4444);
+        }
+
+        .bar-fill.dance {
+            background: linear-gradient(90deg, #ec4899, #a855f7);
+        }
+
+        .bar-fill.valence {
+            background: linear-gradient(90deg, #facc15, #f97316);
+        }
+
+        .bar-fill.acoustic {
+            background: linear-gradient(90deg, #22c55e, #14b8a6);
+        }
+
+        .stat-percent {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+            text-align: right;
+        }
+
+        /* Top Artists */
+        .artist-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .artist-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .artist-item:hover {
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        .artist-rank {
+            font-size: 20px;
+            font-weight: bold;
+            color: #6b7280;
+            width: 32px;
+            text-align: center;
+        }
+
+        .artist-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .artist-info {
+            flex: 1;
+        }
+
+        .artist-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .artist-details {
+            font-size: 14px;
+            color: #9ca3af;
+        }
+
+        /* Playlists */
+        .playlist-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .playlist-card {
+            cursor: pointer;
+        }
+
+        .playlist-cover {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .playlist-cover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .playlist-card:hover .playlist-cover::before {
+            opacity: 1;
+        }
+
+        .playlist-mood {
+            font-size: 48px;
+            z-index: 1;
+        }
+
+        .playlist-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .playlist-meta {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        /* Professional Info */
+        .info-item {
+            margin-bottom: 16px;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: #9ca3af;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            padding: 6px 12px;
+            background: rgba(139, 92, 246, 0.3);
+            border: 1px solid rgba(139, 92, 246, 0.5);
+            border-radius: 999px;
+            font-size: 12px;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(139, 92, 246, 0.2));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .highlight-title {
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .highlight-text {
+            font-size: 14px;
+            color: #d1d5db;
+            margin-bottom: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-bars {
+                grid-template-columns: 1fr;
+            }
+
+            .playlist-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .profile-content {
+                flex-direction: column;
+            }
+
+            .card {
+                padding: 24px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-section.active {
+            animation: fadeIn 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🎵</div>
+                <div class="logo-text">StageBeats</div>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn">🔍</button>
+                <button class="icon-btn">🔔</button>
+                <button class="icon-btn">💬</button>
+                <div class="profile-avatar"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('onboarding')">Création de Profil</button>
+            <button class="tab" onclick="showTab('profile')">Mon Profil</button>
+        </div>
+
+        <!-- Onboarding Section -->
+        <div id="onboarding" class="content-section active">
+            <div class="onboarding-container">
+                <!-- Progress Bar -->
+                <div class="progress-bar-container">
+                    <div class="progress-info">
+                        <span>Étape <span id="current-step">1</span> sur 5</span>
+                        <span class="progress-percent"><span id="progress-percent">20</span>% complété</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 20%"></div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Welcome -->
+                <div id="step-1" class="onboarding-step">
+                    <div class="card" style="text-align: center;">
+                        <div class="welcome-icon">🎵</div>
+                        <h2>Bienvenue sur StageBeats ! 🎵</h2>
+                        <p style="font-size: 18px;">Créons votre profil unique qui mélange votre identité musicale et professionnelle</p>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-box">
+                                <div class="feature-icon">🎵</div>
+                                <p>Connectez Spotify</p>
+                            </div>
+                            <div class="feature-box">
+                                <div class="feature-icon">👥</div>
+                                <p>Trouvez votre tribu</p>
+                            </div>
+                            <div class="feature-box">
+                                <div class="feature-icon">💼</div>
+                                <p>Décrochez un stage</p>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="nextStep()">
+                            Commencer
+                            <span>→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Spotify Connect -->
+                <div id="step-2" class="onboarding-step" style="display: none;">
+                    <div class="card">
+                        <h2>Connectez votre Spotify 🎧</h2>
+                        <p>Nous allons importer vos playlists, artistes préférés et créer votre ADN musical</p>
+
+                        <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                            <h3 style="margin-bottom: 16px;">Ce que nous importerons :</h3>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #22c55e;">✓</span> Vos playlists publiques
+                                </li>
+                                <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #22c55e;">✓</span> Top 50 artistes
+                                </li>
+                                <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #22c55e;">✓</span> Genres musicaux préférés
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #22c55e;">✓</span> Historique d'écoute récent
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button class="btn btn-spotify" onclick="nextStep()">
+                            🎵 Connecter avec Spotify
+                        </button>
+                        <button class="btn btn-secondary" onclick="nextStep()">
+                            Passer cette étape (non recommandé)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Profile Basics -->
+                <div id="step-3" class="onboarding-step" style="display: none;">
+                    <div class="card">
+                        <h2>Votre profil de base 👤</h2>
+                        <p>Présentez-vous à la communauté StageBeats</p>
+
+                        <div class="form-group">
+                            <label class="form-label">Photo de profil</label>
+                            <div class="photo-upload">
+                                <div class="photo-preview">📷</div>
+                                <div class="upload-info">
+                                    <button class="btn-upload">
+                                        ⬆️ Télécharger
+                                    </button>
+                                    <div class="upload-hint">JPG, PNG • Max 5MB</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Nom complet *</label>
+                            <input type="text" class="form-input" placeholder="Ex: Kevin Mbarga">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Ville *</label>
+                            <select class="form-select">
+                                <option>Sélectionnez votre ville</option>
+                                <option>Yaoundé</option>
+                                <option>Douala</option>
+                                <option>Bafoussam</option>
+                                <option>Bamenda</option>
+                                <option>Garoua</option>
+                                <option>Autre</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Bio (160 caractères)</label>
+                            <textarea class="form-textarea" placeholder="Ex: Étudiant passionné de code et d'afrobeat..."></textarea>
+                            <div class="char-count">0/160 caractères</div>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="nextStep()">
+                            Continuer
+                            <span>→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Musical Preferences -->
+                <div id="step-4" class="onboarding-step" style="display: none;">
+                    <div class="card">
+                        <h2>Votre vibe musicale 🎵</h2>
+                        <p>Sélectionnez les ambiances qui correspondent à votre quotidien (minimum 3)</p>
+
+                        <div class="mood-grid">
+                            <div class="mood-card" onclick="toggleMood(this)">
+                                <div class="mood-icon">🎯</div>
+                                <div class="mood-label">Deep Focus</div>
+                                <div class="mood-check">✓</div>
+                            </div>
+                            <div class="mood-card" onclick="toggleMood(this)">
+                                <div class="mood-icon">⚡</div>
+                                <div class="mood-label">High Energy</div>
+                                <div class="mood-check">✓</div>
+                            </div>
+                            <div class="mood-card" onclick="toggleMood(this)">
+                                <div class="mood-icon">😌</div>
+                                <div class="mood-label">Chill Vibes</div>
+                                <div class="mood-check">✓</div>
+                            </div>
+                            <div class="mood-card" onclick="toggleMood(this)">
+                                <div class="mood-icon">💪</div>
+                                <div class="mood-label">Workout</div>
+                                <div class="mood-check">✓</div>
+                            </div>
+                            <div class="mood-card" onclick="toggleMood(this)">
+                                <div class="mood-icon">🎉</div>
+                                <div class="mood-label">Party Time</div>
+                                <div class="mood-check">✓</div>
+                            </div>
+                            <div class="mood-card" onclick="toggleMood(this)">
+                                <div class="mood-icon">📚</div>
+                                <div class="mood-label">Study Mode</div>
+                                <div class="mood-check">✓</div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="nextStep()">
+                            Continuer
+                            <span>→</span>
+                        </button>
+                        <p style="text-align: center; color: #9ca3af; font-size: 14px; margin-top: 12px;">
+                            <span id="mood-count">0</span>/3 sélectionnés minimum
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 5: Professional -->
+                <div id="step-5" class="onboarding-step" style="display: none;">
+                    <div class="card">
+                        <h2>Votre parcours professionnel 💼</h2>
+                        <p>Aidez-nous à vous connecter aux bonnes opportunités</p>
+
+                        <div class="form-group">
+                            <label class="form-label">Statut actuel *</label>
+                            <select class="form-select">
+                                <option>Sélectionnez votre statut</option>
+                                <option>Étudiant(e) Licence</option>
+                                <option>Étudiant(e) Master</option>
+                                <option>Diplômé(e) en recherche</option>
+                                <option>Jeune Professionnel(le)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Établissement</label>
+                            <input type="text" class="form-input" placeholder="Ex: Université de Yaoundé I">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Domaine d'études / Spécialité *</label>
+                            <select class="form-select">
+                                <option>Sélectionnez votre domaine</option>
+                                <option>💻 Informatique / Tech</option>
+                                <option>📊 Commerce / Gestion</option>
+                                <option>🎨 Design / Créatif</option>
+                                <option>🏗️ Ingénierie</option>
+                                <option>🏥 Santé / Médecine</option>
+                                <option>📱 Marketing / Communication</option>
+                                <option>⚖️ Droit</option>
+                                <option>🔬 Sciences</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Type de stage recherché</label>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+                                <button class="mood-card" style="padding: 12px;" onclick="this.classList.toggle('selected')">
+                                    Court terme (1-3 mois)
+                                </button>
+                                <button class="mood-card" style="padding: 12px;" onclick="this.classList.toggle('selected')">
+                                    Long terme (4-6 mois)
+                                </button>
+                                <button class="mood-card" style="padding: 12px;" onclick="this.classList.toggle('selected')">
+                                    Temps plein
+                                </button>
+                                <button class="mood-card" style="padding: 12px;" onclick="this.classList.toggle('selected')">
+                                    Temps partiel
+                                </button>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="completeOnboarding()">
+                            ✓ Créer mon profil
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="profile" class="content-section">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-content">
+                    <div class="profile-pic"></div>
+                    <div class="profile-info">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <h1 class="profile-name">Kevin Mbarga</h1>
+                                <p class="profile-title">Étudiant Informatique • Université de Yaoundé I</p>
+                                <div class="profile-location">
+                                    <span>📍</span>
+                                    <span>Yaoundé, Cameroun</span>
+                                </div>
+                            </div>
+                            <button class="btn-edit">Éditer profil</button>
+                        </div>
+                        
+                        <p class="profile-bio">
+                            Étudiant passionné de code et d'afrobeat. Toujours à la recherche de nouveaux sons et nouvelles opportunités ! 🎵💻
+                        </p>
+
+                        <div class="profile-stats">
+                            <div class="stat-badge music">
+                                🎵 432 chansons
+                            </div>
+                            <div class="stat-badge network">
+                                👥 128 connexions
+                            </div>
+                            <div class="stat-badge jobs">
+                                💼 3 stages postulés
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Grid -->
+            <div class="profile-grid">
+                <!-- Left Column -->
+                <div>
+                    <!-- Musical DNA -->
+                    <div class="section-card" style="margin-bottom: 24px;">
+                        <h2 class="section-title">
+                            <span class="section-icon">🎵</span>
+                            Mon ADN Musical
+                        </h2>
+                        
+                        <div class="stat-bars">
+                            <div class="stat-bar">
+                                <div class="stat-header">
+                                    <span class="stat-label">Énergie</span>
+                                    <span class="stat-value">High</span>
+                                </div>
+                                <div class="bar">
+                                    <div class="bar-fill energy" style="width: 85%"></div>
+                                </div>
+                                <div class="stat-percent">85%</div>
+                            </div>
+
+                            <div class="stat-bar">
+                                <div class="stat-header">
+                                    <span class="stat-label">Danceability</span>
+                                    <span class="stat-value">Très élevé</span>
+                                </div>
+                                <div class="bar">
+                                    <div class="bar-fill dance" style="width: 92%"></div>
+                                </div>
+                                <div class="stat-percent">92%</div>
+                            </div>
+
+                            <div class="stat-bar">
+                                <div class="stat-header">
+                                    <span class="stat-label">Valence (Joie)</span>
+                                    <span class="stat-value">Positif</span>
+                                </div>
+                                <div class="bar">
+                                    <div class="bar-fill valence" style="width: 78%"></div>
+                                </div>
+                                <div class="stat-percent">78%</div>
+                            </div>
+
+                            <div class="stat-bar">
+                                <div class="stat-header">
+                                    <span class="stat-label">Acoustique</span>
+                                    <span class="stat-value">Mixte</span>
+                                </div>
+                                <div class="bar">
+                                    <div class="bar-fill acoustic" style="width: 45%"></div>
+                                </div>
+                                <div class="stat-percent">45%</div>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; padding: 16px;">
+                            <p style="font-size: 14px; color: #d1d5db;">
+                                <strong style="color: white;">Votre signature sonore :</strong> Vous aimez les rythmes entraînants avec une forte énergie. Parfait pour travailler dans des environnements dynamiques et créatifs !
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Top Artists -->
+                    <div class="section-card" style="margin-bottom: 24px;">
+                        <h2 class="section-title">
+                            <span class="section-icon">📈</span>
+                            Top Artistes (Ce mois)
+                        </h2>
+                        
+                        <div class="artist-list">
+                            <div class="artist-item">
+                                <div class="artist-rank">1</div>
+                                <div class="artist-avatar" style="background: linear-gradient(135deg, #f97316, #ef4444);">🎵</div>
+                                <div class="artist-info">
+                                    <div class="artist-name">Burna Boy</div>
+                                    <div class="artist-details">Afrobeat • 234 écoutes</div>
+                                </div>
+                            </div>
+
+                            <div class="artist-item">
+                                <div class="artist-rank">2</div>
+                                <div class="artist-avatar" style="background: linear-gradient(135deg, #22c55e, #14b8a6);">🎵</div>
+                                <div class="artist-info">
+                                    <div class="artist-name">Salatiel</div>
+                                    <div class="artist-details">Afropop • 189 écoutes</div>
+                                </div>
+                            </div>
+
+                            <div class="artist-item">
+                                <div class="artist-rank">3</div>
+                                <div class="artist-avatar" style="background: linear-gradient(135deg, #a855f7, #ec4899);">🎵</div>
+                                <div class="artist-info">
+                                    <div class="artist-name">Kendrick Lamar</div>
+                                    <div class="artist-details">Hip-Hop • 156 écoutes</div>
+                                </div>
+                            </div>
+
+                            <div class="artist-item">
+                                <div class="artist-rank">4</div>
+                                <div class="artist-avatar" style="background: linear-gradient(135deg, #3b82f6, #a855f7);">🎵</div>
+                                <div class="artist-info">
+                                    <div class="artist-name">Tems</div>
+                                    <div class="artist-details">R&B/Soul • 142 écoutes</div>
+                                </div>
+                            </div>
+
+                            <div class="artist-item">
+                                <div class="artist-rank">5</div>
+                                <div class="artist-avatar" style="background: linear-gradient(135deg, #facc15, #f97316);">🎵</div>
+                                <div class="artist-info">
+                                    <div class="artist-name">Jovi</div>
+                                    <div class="artist-details">Hip-Hop • 128 écoutes</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Playlists -->
+                    <div class="section-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <h2 class="section-title" style="margin: 0;">
+                                <span class="section-icon">🎧</span>
+                                Mes Playlists Pro
+                            </h2>
+                            <a href="#" style="color: #a855f7; font-size: 14px; text-decoration: none;">Voir toutes</a>
+                        </div>
+                        
+                        <div class="playlist-grid">
+                            <div class="playlist-card">
+                                <div class="playlist-cover" style="background: linear-gradient(135deg, #3b82f6, #a855f7);">
+                                    <div class="playlist-mood">🎯</div>
+                                </div>
+                                <div class="playlist-title">Deep Focus Code</div>
+                                <div class="playlist-meta">42 titres • 2h 45min</div>
+                            </div>
+
+                            <div class="playlist-card">
+                                <div class="playlist-cover" style="background: linear-gradient(135deg, #f97316, #ef4444);">
+                                    <div class="playlist-mood">⚡</div>
+                                </div>
+                                <div class="playlist-title">Startup Energy</div>
+                                <div class="playlist-meta">28 titres • 1h 52min</div>
+                            </div>
+
+                            <div class="playlist-card">
+                                <div class="playlist-cover" style="background: linear-gradient(135deg, #22c55e, #14b8a6);">
+                                    <div class="playlist-mood">🎵</div>
+                                </div>
+                                <div class="playlist-title">Afrobeat Vibes</div>
+                                <div class="playlist-meta">56 titres • 3h 12min</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div>
+                    <!-- Professional Profile -->
+                    <div class="section-card" style="margin-bottom: 24px;">
+                        <h2 class="section-title">
+                            <span class="section-icon">💼</span>
+                            Profil Pro
+                        </h2>
+                        
+                        <div class="info-item">
+                            <div class="info-label">Statut</div>
+                            <div class="info-value">
+                                🎓 Étudiant Licence
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">Établissement</div>
+                            <div class="info-value">
+                                Université de Yaoundé I
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">Domaine</div>
+                            <div class="info-value">
+                                💻 Informatique / Tech
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">Compétences</div>
+                            <div class="skills-container">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">SQL</span>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">Type de stage</div>
+                            <div class="info-value">
+                                📅 Long terme (4-6 mois)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Musical Compatibility -->
+                    <div class="highlight-box" style="margin-bottom: 24px;">
+                        <div class="highlight-title">
+                            🏆 Compatibilité Musicale
+                        </div>
+                        <p class="highlight-text">
+                            Vous correspondez musicalement avec <strong>347 professionnels</strong> dans le secteur Tech !
+                        </p>
+                        <button class="btn btn-spotify" style="width: 100%; padding: 12px;">
+                            Voir les matches
+                        </button>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="section-card" style="margin-bottom: 24px;">
+                        <h3 style="font-weight: bold; margin-bottom: 16px;">Activité Récente</h3>
+                        <div style="font-size: 14px;">
+                            <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                                <div style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%; margin-top: 6px; flex-shrink: 0;"></div>
+                                <div>
+                                    <p style="color: #d1d5db;">Nouvelle playlist ajoutée</p>
+                                    <p style="font-size: 12px; color: #6b7280;">Il y a 2 heures</p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                                <div style="width: 8px; height: 8px; background: #a855f7; border-radius: 50%; margin-top: 6px; flex-shrink: 0;"></div>
+                                <div>
+                                    <p style="color: #d1d5db;">3 nouvelles connexions</p>
+                                    <p style="font-size: 12px; color: #6b7280;">Il y a 5 heures</p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 8px;">
+                                <div style="width: 8px; height: 8px; background: #ec4899; border-radius: 50%; margin-top: 6px; flex-shrink: 0;"></div>
+                                <div>
+                                    <p style="color: #d1d5db;">Postulé chez Orange CM</p>
+                                    <p style="font-size: 12px; color: #6b7280;">Hier</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Share Profile -->
+                    <div class="section-card">
+                        <h3 style="font-weight: bold; margin-bottom: 12px;">Partager mon profil</h3>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn" style="flex: 1; background: rgba(139, 92, 246, 0.3); border: 1px solid rgba(139, 92, 246, 0.5); padding: 12px;">
+                                🔗 Partager
+                            </button>
+                            <button class="btn" style="background: rgba(55, 65, 81, 0.5); border: 1px solid rgba(107, 114, 128, 0.5); padding: 12px;">
+                                ❤️
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let selectedMoods = 0;
+
+        function showTab(tabName) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(tabName).classList.add('active');
+            
+            // Update tab active state
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function nextStep() {
+            // Hide current step
+            document.getElementById('step-' + currentStep).style.display = 'none';
+            
+            // Increment step
+            currentStep++;
+            
+            // Show next step
+            if (currentStep <= 5) {
+                document.getElementById('step-' + currentStep).style.display = 'block';
+                
+                // Update progress
+                updateProgress();
+            }
+        }
+
+        function updateProgress() {
+            const percent = (currentStep / 5) * 100;
+            document.getElementById('current-step').textContent = currentStep;
+            document.getElementById('progress-percent').textContent = Math.round(percent);
+            document.getElementById('progress-fill').style.width = percent + '%';
+        }
+
+        function toggleMood(element) {
+            element.classList.toggle('selected');
+            
+            // Count selected moods
+            selectedMoods = document.querySelectorAll('.mood-card.selected').length;
+            if (document.getElementById('mood-count')) {
+                document.getElementById('mood-count').textContent = selectedMoods;
+            }
+        }
+
+        function completeOnboarding() {
+            // Switch to profile view
+            document.getElementById('onboarding').classList.remove('active');
+            document.getElementById('profile').classList.add('active');
+            
+            // Update tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab')[1].classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Animate bars on page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const bars = document.querySelectorAll('.bar-fill');
+                bars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
