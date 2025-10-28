@@ -144,7 +144,7 @@ if 'current_page' in st.session_state:
             numeric_cols = df.select_dtypes(include=['number']).columns
             if len(numeric_cols) > 1:
                 corr_matrix = df[numeric_cols].corr()
-                fig_corr = px.imshow(corr_matrix, text_auto=True, title="Matrice de corrélation des variables numériques")
+                fig_corr = px.imshow(corr_matrix, text_auto=True, title="Matrice de corrélation des variables numériques",height=800)
                 st.plotly_chart(fig_corr,use_container_width=True)
             else:
                 st.info("Pas assez de colonnes numériques pour afficher une matrice de corrélation.")

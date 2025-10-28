@@ -60,7 +60,7 @@ st.markdown("""
 # Chargement des données
 @st.cache_data
 def load_data():
-    path="supply_chain_data.csv"
+    path="Test_Project\Data\supply_chain_data.csv"
     data = pd.read_csv(path)
     data.columns = data.columns.str.strip()  # Nettoyage des noms de colonnes
     data.rename(columns={'Product type':'Product_type',
@@ -86,7 +86,7 @@ df = load_data()
 
 #Transform columns
    # Total Sold
-df['Chiffre_d_affaires'] = df['Price'] * df['Number_of_products_sold'] #+ df['Revenue_generated']
+df['Chiffre_d_affaires'] = df['Price'] * df['Number_of_products_sold'] # df['Revenue_generated']
 df.drop(columns=['Revenue_generated','Lead times'], inplace=True)
     # Variable Cost by units
 df['Manufacturing_costs'] = df['Manufacturing_costs_by_unit'] * df['Production_volumes']
