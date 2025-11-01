@@ -122,13 +122,13 @@ col_nav1, col_nav2, col_nav3 = st.columns([ 1, 1, 1])
 
 with col_nav1:
     if st.button(label="Financial Health Analysis" ,icon="📊" ,use_container_width=True):
-        st.switch_page("Projets/pages/page1.py")
+        st.switch_page("https://github.com/Dzeu237/Projet_Viz/blob/main/Projet_novembre2025/Projets/Projet1/page1.py")
 
 with col_nav2:
     if st.button(label="Easy Model Prediction",icon="🏠" ,use_container_width=True):
-        st.switch_page("Projets/pages/page2.py")
+        st.switch_page("https://github.com/Dzeu237/Projet_Viz/blob/main/Projet_novembre2025/Projets/pages/page2.py")
 
 with col_nav3:
     if st.button(label="Student AI Usage Trend",icon="🤖" ,use_container_width=True):
-        st.switch_page("Projets/pages/page3.py")
+        st.switch_page("https://github.com/Dzeu237/Projet_Viz/blob/main/Projet_novembre2025/Projets/pages/page3.py")
 
