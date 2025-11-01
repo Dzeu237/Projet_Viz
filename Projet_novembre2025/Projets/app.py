@@ -120,11 +120,12 @@ st.write(
 # --- Barre latérale de navigation ---
 col_nav1, col_nav2, col_nav3 = st.columns([ 1, 1, 1])
 
+with col_nav3:
+    st.page_link(label="Financial Health Analysis", page="Pages\page1.py",icon="📊" ,use_container_width=True)
+
 with col_nav1:
-    st.page_link(label="🏠 Ticket Support", page="Pages\page1.py", use_container_width=True)
+    st.page_link(label="Easy Model Prediction", page="Pages\page2.py",icon="🏠" ,use_container_width=True)
 
 with col_nav2:
-    st.page_link(label="📊 Job Prediction", page="Pages\page2.py", use_container_width=True)
+    st.page_link(label="Student AI Usage Trend", page="Pages\page3.py",icon="🤖" ,use_container_width=True)
 
-with col_nav3:
-    st.page_link(label="⚙️ Sentimental Analysis", page="Pages\page3.py", use_container_width=True)
