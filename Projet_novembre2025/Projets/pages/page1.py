@@ -21,22 +21,22 @@ st.session_state.current_page= st.session_state.get('current_page', 'Finance')
 col_nav2, col_nav3, col_nav4, col_nav5 = st.columns([ 1, 1, 1, 1])
 
 with col_nav2:
-    if st.button("💶 Financial Metrics", key="Financial_metrics", use_container_width=True):
+    if st.button("💶 Financial Metrics", key="Financial_metrics", width='content'):
         st.session_state.current_page = 'Finance'
 
 
 with col_nav3:
-    if st.button("📋 Operational Metrics", key="Operational_metrics", use_container_width=True):
+    if st.button("📋 Operational Metrics", key="Operational_metrics", width='content'):
         st.session_state.current_page = 'Operational'
 
 
 with col_nav4:
-    if st.button("☑️ Quality Metrics", key="Quality_metrics", use_container_width=True):
+    if st.button("☑️ Quality Metrics", key="Quality_metrics", width='content'):
         st.session_state.current_page = 'Quality'
 
 
 with col_nav5:
-    if st.button("🤝 Commercial Metrics", key="Commercial_metrics", use_container_width=True):
+    if st.button("🤝 Commercial Metrics", key="Commercial_metrics", width='content'):
         st.session_state.current_page = 'Commercial'
 
 
@@ -202,14 +202,14 @@ if st.session_state.current_page == 'Finance':
             yaxis_title="Montant (€)",
             barmode='group'
         )
-        st.plotly_chart(fig1, use_container_width=True)
+        st.plotly_chart(fig1, width='content')
 
         #Graphique 2: Circle chart des produits vendus
         product_sales = df_filtered.groupby('Product_type')['Number_of_products_sold'].sum().reset_index()
         fig2 = px.pie(product_sales, values='Number_of_products_sold', names='Product_type',
                     title='Répartition des Produits Vendus par Type de Produit',
                     hole=0.4)
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, width='content')
 
     with col2:
         # Graphique 3: graphique en cascade Taux de Marge par produit
@@ -229,7 +229,7 @@ if st.session_state.current_page == 'Finance':
             xaxis_title="Type de Produit",
             yaxis_title="Taux de Marge Commerciale (%)",
         )
-        st.plotly_chart(fig3, use_container_width=True)
+        st.plotly_chart(fig3, width='content')
 
         # Graphique 4: ROI par type de produit
         roi_by_product = df_filtered.groupby('Product_type').apply(lambda x: ((x['Chiffre_d_affaires'].sum() - (x['Variable_Cost'].sum() + x['Fixed_cost'].sum())) / (x['Variable_Cost'].sum() + x['Fixed_cost'].sum())) * 100).reset_index(name='ROI').sort_values(by='ROI', ascending=False)
@@ -245,7 +245,7 @@ if st.session_state.current_page == 'Finance':
             xaxis_title="ROI (%)",
             yaxis_title="Type de Produit",
         )
-        st.plotly_chart(fig4, use_container_width=True)
+        st.plotly_chart(fig4, width='content')
 
 # Visualisations des Metrics Operationnelles
 elif st.session_state.current_page == 'Operational':
@@ -259,7 +259,7 @@ elif st.session_state.current_page == 'Operational':
             })).reset_index()
         fig1=px.bar(transport_mode,y='Location',x='Shippment_mean_Cost',color='Routes',barmode='group',orientation='h')
         fig1.update_traces(text=transport_mode['Transportation modes'],textposition='inside')
-        st.plotly_chart(fig1,use_container_width=True)
+        st.plotly_chart(fig1,width='content')
 # Graphique 2: Sales Velocity et Production Velocity
         velocity_by_product = df.groupby('Product_type').apply(lambda x: pd.Series({
             'Sales_Velocity': x['Number_of_products_sold'].mean() / (x['Manufacturing_lead_time'].mean() + x['Shipping_times'].mean()),
@@ -274,7 +274,7 @@ elif st.session_state.current_page == 'Operational':
             xaxis_title="Type de Produit",
             barmode='group'
         )
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, width='content')
 
     with col2:
         # Graphique 3: Indice de Complexité Opérationnelle par type de produit
@@ -284,7 +284,7 @@ elif st.session_state.current_page == 'Operational':
                       text=[f'{val:,.2f}' for val in complexity_by_product['Operational_Complexity_Index']]
                       )
         fig3.update_traces(textposition='outside', marker_color='coral')
-        st.plotly_chart(fig3, use_container_width=True)
+        st.plotly_chart(fig3, width='content')
         # Graphique 4: Disponibilité et Stock Level Moyenne par type de produit
         availability_by_product = df.groupby('Product_type').apply(lambda x: pd.Series({
             'Availability': x['Availability'].mean(),
@@ -299,7 +299,7 @@ elif st.session_state.current_page == 'Operational':
             xaxis_title="Type de Produit",
             barmode='group'
         )
-        st.plotly_chart(fig4, use_container_width=True)
+        st.plotly_chart(fig4, width='content')
 
 else:
     st.info("Veuillez sélectionner l'onglet 'Financial Metrics' pour afficher ces visualisations.")

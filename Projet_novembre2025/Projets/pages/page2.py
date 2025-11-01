@@ -66,23 +66,23 @@ def train_regression_models(X_train, y_train, X_test, y_test, models_to_run):
 col_nav2, col_nav3, col_nav4, col_nav5, col_nav6 = st.columns([ 1, 1, 1, 1, 1])
 
 with col_nav2:
-    if st.button("📥 Chargement des Donnees", use_container_width=True):
+    if st.button("📥 Chargement des Donnees", width='content'):
         st.session_state.current_page = 'Load'
 
 with col_nav3:
-    if st.button("🔎 Exploration", use_container_width=True):
+    if st.button("🔎 Exploration", width='content'):
         st.session_state.current_page = 'Explore'
 
 with col_nav4:
-    if st.button("🔄 Transformation", use_container_width=True):
+    if st.button("🔄 Transformation", width='content'):
         st.session_state.current_page = 'Transform'
 
 with col_nav5:
-    if st.button("⚙️ Test des Modeles", use_container_width=True):
+    if st.button("⚙️ Test des Modeles", width='content'):
         st.session_state.current_page = 'Model'
 
 with col_nav6:
-    if st.button("🧩 Test avec un echantillon", use_container_width=True):
+    if st.button("🧩 Test avec un echantillon", width='content'):
         st.session_state.current_page = 'Test'
 
 
@@ -145,7 +145,7 @@ if 'current_page' in st.session_state:
             if len(numeric_cols) > 1:
                 corr_matrix = df[numeric_cols].corr()
                 fig_corr = px.imshow(corr_matrix, text_auto=True, title="Matrice de corrélation des variables numériques",height=800)
-                st.plotly_chart(fig_corr,use_container_width=True)
+                st.plotly_chart(fig_corr,width='content')
             else:
                 st.info("Pas assez de colonnes numériques pour afficher une matrice de corrélation.")
 

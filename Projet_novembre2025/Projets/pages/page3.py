@@ -39,12 +39,12 @@ def extract_date_features(df):
 
 col_nav1, col_nav2= st.columns([ 1, 1],gap="Small")
 with col_nav1:
-        if st.button("🏠 Analytics Metrics", key="metrics", use_container_width=True):
+        if st.button("🏠 Analytics Metrics", key="metrics", width='content'):
             st.session_state.page1 = 'Metrics'
 
 
 with col_nav2:
-        if st.button("👤 Segmentation Method", key="Segment", use_container_width=True):
+        if st.button("👤 Segmentation Method", key="Segment", width='content'):
             st.session_state.page1 = 'Segmentation'
 
 
@@ -65,7 +65,7 @@ if 'page1'  in st.session_state:
                         names=df_filtred['StudentLevel'].value_counts().index,
                         values=df_filtred['StudentLevel'].value_counts().values
                         )
-            st.plotly_chart(fig1,use_container_width=True)
+            st.plotly_chart(fig1,width='content')
             data=df_filtred.groupby('TaskType').agg({'SessionLengthMin':'mean','TotalPrompts':'mean'}).reset_index()
             fig4=go.Figure()
 
@@ -84,7 +84,7 @@ if 'page1'  in st.session_state:
             # fig4.update_yaxis(title_text="Nombre de prompts", secondary_y=True)
 
             # Titre et légende
-            st.plotly_chart(fig4,use_container_width=True)
+            st.plotly_chart(fig4,width='content')
             
         with col3:
             fig2=px.pie(
@@ -92,14 +92,14 @@ if 'page1'  in st.session_state:
                   values=df_filtred['FinalOutcome'].value_counts().values,
                   hole=0.4
                   )
-            st.plotly_chart(fig2,use_container_width=True)
+            st.plotly_chart(fig2,width='content')
             fig3=px.pie(
                   names=df_filtred['Satisfaction'].value_counts().index,
                   values=df_filtred['Satisfaction'].value_counts().values,
                   hole=0.4,
                   color_discrete_map={'Low':'red','Medium':'orange','High':'green'}
                   )
-            st.plotly_chart(fig3,use_container_width=True)
+            st.plotly_chart(fig3,width='content')
     
     
     elif st.session_state.page1 == 'Segmentation':
@@ -167,7 +167,7 @@ if 'page1'  in st.session_state:
             )
             fig_ind.update_traces(marker=dict(size=6, color='steelblue'))
             fig_ind.update_layout(height=500)
-            st.plotly_chart(fig_ind, use_container_width=True)
+            st.plotly_chart(fig_ind, width='content')
 
         with col2:
             st.subheader("Projection des modalités")
@@ -197,7 +197,7 @@ if 'page1'  in st.session_state:
             )
             fig_mod.update_traces(textposition='top center', marker=dict(size=10))
             fig_mod.update_layout(height=500)
-            st.plotly_chart(fig_mod, use_container_width=True)
+            st.plotly_chart(fig_mod, width='content')
 
         st.markdown("---")
 
@@ -249,7 +249,7 @@ if 'page1'  in st.session_state:
                 yaxis_title="Inertie",
                 height=400
             )
-            st.plotly_chart(fig_elbow, use_container_width=True)
+            st.plotly_chart(fig_elbow, width='content')
 
         with col2:
             st.subheader("Score de Silhouette")
@@ -267,7 +267,7 @@ if 'page1'  in st.session_state:
                 yaxis_title="Score de Silhouette",
                 height=400
             )
-            st.plotly_chart(fig_sil, use_container_width=True)
+            st.plotly_chart(fig_sil, width='content')
 
         # Clustering final avec K optimal
         #optimal_k = 3  # Vous pouvez ajuster selon les graphiques ci-dessus
@@ -316,7 +316,7 @@ if 'page1'  in st.session_state:
             )
             fig_clusters.update_traces(marker=dict(size=8))
             fig_clusters.update_layout(height=500)
-            st.plotly_chart(fig_clusters, use_container_width=True)
+            st.plotly_chart(fig_clusters, width='content')
 
         with col2:
             # Taille des clusters
@@ -330,7 +330,7 @@ if 'page1'  in st.session_state:
                 color_discrete_sequence=px.colors.qualitative.Set2
             )
             fig_sizes.update_layout(showlegend=False, height=500)
-            st.plotly_chart(fig_sizes, use_container_width=True)
+            st.plotly_chart(fig_sizes, width='content')
 
         st.markdown("---")
 
@@ -415,7 +415,7 @@ if 'page1'  in st.session_state:
                 color_discrete_sequence=px.colors.qualitative.Set2
             )
             fig_box1.update_layout(showlegend=False)
-            st.plotly_chart(fig_box1, use_container_width=True)
+            st.plotly_chart(fig_box1, width='content')
 
         with col2:
             # Box plot pour TotalPrompts
@@ -428,7 +428,7 @@ if 'page1'  in st.session_state:
                 color_discrete_sequence=px.colors.qualitative.Set2
             )
             fig_box2.update_layout(showlegend=False)
-            st.plotly_chart(fig_box2, use_container_width=True)
+            st.plotly_chart(fig_box2, width='content')
 
         # Distribution des variables catégorielles
         col1, col2 = st.columns(2)
@@ -456,7 +456,7 @@ if 'page1'  in st.session_state:
                 barmode='stack',
                 height=400
             )
-            st.plotly_chart(fig_sat, use_container_width=True)
+            st.plotly_chart(fig_sat, width='content')
 
         with col2:
             # TaskType par cluster
@@ -481,7 +481,7 @@ if 'page1'  in st.session_state:
                 barmode='stack',
                 height=400
             )
-            st.plotly_chart(fig_task, use_container_width=True)
+            st.plotly_chart(fig_task, width='content')
 
         # Tableau récapitulatif
         st.subheader("Tableau récapitulatif des segments")
@@ -500,7 +500,7 @@ if 'page1'  in st.session_state:
             })
 
         summary_df = pd.DataFrame(summary_data)
-        st.dataframe(summary_df, use_container_width=True)
+        st.dataframe(summary_df, width='content')
         st.session_state.fig=fig_clusters
         st.session_state.kmeans=kmeans
         st.session_state.categorical_vars=categorical_vars
