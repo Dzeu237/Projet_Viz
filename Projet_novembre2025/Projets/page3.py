@@ -25,7 +25,7 @@ st.markdown("---")
 @st.cache_data
 def load_data():
     import pandas as pd
-    df = pd.read_csv('Data/ai_assistant_usage_student_life.csv')
+    df = pd.read_csv('https://github.com/Dzeu237/Projet_Viz/blob/main/Projet_novembre2025/Projets/Data/ai_assistant_usage_student_life.csv?raw=true')
     return df
 df=load_data()
 df_cleaned=df.drop(columns=['SessionID','SessionDate'])
