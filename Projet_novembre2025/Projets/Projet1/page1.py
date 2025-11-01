@@ -60,7 +60,7 @@ st.markdown("""
 # Chargement des données
 @st.cache_data
 def load_data():
-    path="Data/supply_chain_data.csv"
+    path="https://github.com/Dzeu237/Projet_Viz/blob/main/Projet_novembre2025/Projets/Data/supply_chain_data.csv?raw=true"
     data = pd.read_csv(path)
     data.columns = data.columns.str.strip()  # Nettoyage des noms de colonnes
     data.rename(columns={'Product type':'Product_type',
