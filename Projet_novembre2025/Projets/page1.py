@@ -60,7 +60,7 @@ st.markdown("""
 # Chargement des données
 @st.cache_data
 def load_data():
-    path="Data\supply_chain_data.csv"
+    path="Data/supply_chain_data.csv"
     data = pd.read_csv(path)
     data.columns = data.columns.str.strip()  # Nettoyage des noms de colonnes
     data.rename(columns={'Product type':'Product_type',
