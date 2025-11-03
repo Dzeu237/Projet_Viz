@@ -274,8 +274,8 @@ elif st.session_state.current_page == 'projects':
     # Projet 1: Student Performance Dashboard
     st.markdown("""
     <div class="project-card">
-        <h2>Easy Model Prediction</h2>
-        <p style="color: #666; font-size: 0.9rem;">Septembre 2024</p>
+        <h2> Easy Model Prediction </h2>
+        <p style="color: #666; font-size: 0.9rem;"> Septembre 2025 </p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -311,8 +311,8 @@ elif st.session_state.current_page == 'projects':
     # Projet 2: Retail Analytics
     st.markdown("""
     <div class="project-card">
-        <h2>Tableau de Bord Décisionnel pour Diagnostic d'Entreprise</h2>
-        <p style="color: #666; font-size: 0.9rem;">Janvier 2025</p>
+        <h2> Tableau de Bord Décisionnel pour Diagnostic d'Entreprise </h2>
+        <p style="color: #666; font-size: 0.9rem;"> Octobre 2025 </p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -345,8 +345,8 @@ elif st.session_state.current_page == 'projects':
     # Projet 3: Architecture Database
     st.markdown("""
     <div class="project-card">
-        <h2>Analyse Comportementale : Utilisation de l'IA par les Étudiants</h2>
-        <p style="color: #666; font-size: 0.9rem;">Novembre 2024</p>
+        <h2> Analyse Comportementale : Utilisation de l'IA par les Étudiants </h2>
+        <p style="color: #666; font-size: 0.9rem;"> Septembre 2025 </p>
     </div>
     """, unsafe_allow_html=True)
     
