@@ -1,6 +1,7 @@
 import streamlit as st
 
 
+
 # Configuration de la page
 st.set_page_config(
     page_title="Claude Dzeugueu | Data Analyst Portfolio",
@@ -425,7 +426,7 @@ elif st.session_state.current_page == 'contact':
                 </a>
             </p>
         </div>
-        """, unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
         
         st.markdown("---")
         st.markdown("### 🎯 Disponibilité")
@@ -435,26 +436,6 @@ elif st.session_state.current_page == 'contact':
     with col2:
         st.markdown("### ✉️ Envoyez-moi un message")
         
-        with st.form("contact_form"):
-            name = st.text_input("Nom *")
-            email = st.text_input("Email *")
-            company = st.text_input("Entreprise")
-            subject = st.selectbox(
-                "Sujet *",
-                ["Stage/Alternance", "Projet collaboratif", "Question technique", "Autre"]
-            )
-            message = st.text_area("Message *", height=150)
-            
-            submitted = st.form_submit_button("📤 Envoyer le message")
-            
-            if submitted:
-                if name and email and message:
-                    st.success("✅ Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.")
-                else:
-                    st.error("⚠️ Veuillez remplir tous les champs obligatoires (*)")
-        
-        st.markdown("---")
-        st.markdown("### 🔗 Réseaux Professionnels")
         
         col_a, col_b, col_c = st.columns(3)
         with col_a:
