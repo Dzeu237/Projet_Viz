@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 st.markdown("""
-# 📝 Analyse de la Situation de l'Entreprise X
+#  Analyse de la Situation de l'Entreprise X
 ## Objectif de l'Étude
 
 Suite au **bilan d'entreprise exhaustif**, cette analyse vise à :
@@ -22,20 +22,20 @@ Suite au **bilan d'entreprise exhaustif**, cette analyse vise à :
 
 ---
 
-## 🎯 Segmentation Stratégique des Visuels
+##  Segmentation Stratégique des Visuels
 
 Afin d'assurer une lecture structurée et une action ciblée, les indicateurs et visuels sont segmentés selon les **quatre axes stratégiques** suivants :
 
-### 1. Axe Financier 💰
+### 1. Axe Financier 
 > **Focus :** Rentabilité, Trésorerie, Structure des Marges (ex: Marge Commerciale, ROI).
 
-### 2. Axe Commercial 🛍️
+### 2. Axe Commercial 
 > **Focus :** Performance des Ventes (Chiffre d'affaires), Parts de marché, Pénétration produit/client.
 
-### 3. Axe Opérationnel ⚙️
+### 3. Axe Opérationnel 
 > **Focus :** Efficacité des processus, Productivité, Cycle de conversion du Cash (CCC), Gestion des stocks.
 
-### 4. Axe Qualité / Clientèle ⭐
+### 4. Axe Qualité / Clientèle 
 > **Focus :** Satisfaction client (NPS), Taux de défauts ou de retours, Conformité réglementaire.
 """)
 
@@ -232,7 +232,7 @@ if st.session_state.current_page == 'Finance':
         st.plotly_chart(fig1, width='content')
 
         #Graphique 2: Circle chart des produits vendus
-        product_sales = df_filtered.groupby('Product_type')['Number_of_products_sold'].sum().reset_index()
+        product_sales = df.groupby('Product_type')['Number_of_products_sold'].sum().reset_index()
         fig2 = px.pie(product_sales, values='Number_of_products_sold', names='Product_type',
                     title='Répartition des Produits Vendus par Type de Produit',
                     hole=0.4)
@@ -259,7 +259,7 @@ if st.session_state.current_page == 'Finance':
         st.plotly_chart(fig3, width='content')
 
         # Graphique 4: ROI par type de produit
-        roi_by_product = df_filtered.groupby('Product_type').apply(lambda x: ((x['Chiffre_d_affaires'].sum() - (x['Variable_Cost'].sum() + x['Fixed_cost'].sum())) / (x['Variable_Cost'].sum() + x['Fixed_cost'].sum())) * 100).reset_index(name='ROI').sort_values(by='ROI', ascending=False)
+        roi_by_product = df.groupby('Product_type').apply(lambda x: ((x['Chiffre_d_affaires'].sum() - (x['Variable_Cost'].sum() + x['Fixed_cost'].sum())) / (x['Variable_Cost'].sum() + x['Fixed_cost'].sum())) * 100).reset_index(name='ROI').sort_values(by='ROI', ascending=False)
         fig4 = go.Figure(go.Funnel(
             x=roi_by_product['Product_type'],
             y=roi_by_product['ROI'],
