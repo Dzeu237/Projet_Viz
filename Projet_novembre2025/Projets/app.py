@@ -3,7 +3,7 @@ import streamlit as st
 # --- Configuration de la page Streamlit ---
 st.set_page_config(
     page_title="Plateforme d'Expérimentation NLP",
-    page_icon=":robot_face:",
+    page_icon="💼",
     layout="wide",
     initial_sidebar_state="expanded"
 )
