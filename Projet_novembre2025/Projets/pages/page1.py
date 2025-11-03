@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-
 # Configuration de la page
 st.set_page_config(
     page_title="Dashboard Cosmétiques",
@@ -11,6 +10,34 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+st.markdown("""
+# 📝 Analyse de la Situation de l'Entreprise X
+## Objectif de l'Étude
+
+Suite au **bilan d'entreprise exhaustif**, cette analyse vise à :
+
+* **Présenter synthétiquement** les **forces et faiblesses** de l'entreprise X.
+* Fournir des **visuels didactiques** pour **faciliter la prise de décision stratégique** par les dirigeants.
+
+---
+
+## 🎯 Segmentation Stratégique des Visuels
+
+Afin d'assurer une lecture structurée et une action ciblée, les indicateurs et visuels sont segmentés selon les **quatre axes stratégiques** suivants :
+
+### 1. Axe Financier 💰
+> **Focus :** Rentabilité, Trésorerie, Structure des Marges (ex: Marge Commerciale, ROI).
+
+### 2. Axe Commercial 🛍️
+> **Focus :** Performance des Ventes (Chiffre d'affaires), Parts de marché, Pénétration produit/client.
+
+### 3. Axe Opérationnel ⚙️
+> **Focus :** Efficacité des processus, Productivité, Cycle de conversion du Cash (CCC), Gestion des stocks.
+
+### 4. Axe Qualité / Clientèle ⭐
+> **Focus :** Satisfaction client (NPS), Taux de défauts ou de retours, Conformité réglementaire.
+""")
 
 # Titre principal
 st.title(" Dashboard Analyse Produits Cosmétiques")

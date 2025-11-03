@@ -333,6 +333,7 @@ elif st.session_state.current_page == 'projects':
         st.markdown('<span class="skill-badge">Streamlit</span>', unsafe_allow_html=True)
         st.markdown('<span class="skill-badge">Ploty</span>', unsafe_allow_html=True)
         st.markdown('<span class="skill-badge">Pandas</span>', unsafe_allow_html=True)
+        st.markdown('<span class="skill-badge">Gestion Financiere</span>', unsafe_allow_html=True)
         
         st.markdown("**📈 Métriques**")
         st.metric("Réduction délai décisionnel", "60%")
