@@ -17,9 +17,17 @@ st.set_page_config(
 
 # --- ENTETE ---
 st.markdown("---")
-st.title("**Analyse de l'usage de IA chez les etudiants**")
+st.title("**Analyse Comportementale : Utilisation de l'IA par les Étudiants**")
 st.markdown("---")
 
+st.markdown("""
+Cette section se concentre sur l'analyse approfondie des comportements des étudiants utilisant des assistants IA dans leur vie académique.
+ En exploitant des techniques avancées telles que l'Analyse des Correspondances Multiples (ACM) et le clustering K-Means,
+ nous visons à segmenter les utilisateurs en groupes distincts basés sur leurs interactions avec l'IA.
+Cette segmentation nous permettra de mieux comprendre les profils d'utilisateurs, 
+d'identifier des tendances clés et de formuler des recommandations stratégiques 
+pour optimiser l'engagement et la satisfaction des étudiants vis-à-vis des outils d'assistance IA.
+""")
 
 #Chargement des données
 @st.cache_data
