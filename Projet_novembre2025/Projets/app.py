@@ -150,19 +150,9 @@ st.divider()
 
 # Les défis métier
 st.markdown("## 🎯 Les défis métier adressés")
-col1, col2 = st.columns(spec=[1, 1], gap="large")
+col1, col2, col3 = st.columns(spec=[1, 1, 1], gap="large")
 
 with col1:
-    st.markdown("""
-        <div class="challenge-box" style="border-left-color: #3b82f6;">
-            <h4>📊 Démocratisation de l'IA</h4>
-            <p><strong>Problème :</strong> Les équipes perdent 40% de leur temps sur des tâches 
-            répétitives de modélisation.</p>
-            <p><strong>Solution :</strong> Automatisation du pipeline ML permettant aux non-experts 
-            d'exploiter la puissance prédictive sans compétences avancées en code.</p>
-        </div>
-    """, unsafe_allow_html=True)
-    
     st.markdown("""
         <div class="challenge-box" style="border-left-color: #8b5cf6;">
             <h4>👥 Compréhension des comportements</h4>
@@ -184,14 +174,15 @@ with col2:
         </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("""
-        <div class="challenge-box" style="border-left-color: #f59e0b;">
-            <h4>💰 ROI mesurable</h4>
-            <p><strong>Problème :</strong> Difficulté à prouver la valeur des investissements data.</p>
-            <p><strong>Solution :</strong> Métriques concrètes (gain de temps, précision, réduction 
-            coûts) pour justifier chaque initiative analytique.</p>
-        </div>
-    """, unsafe_allow_html=True)
+    with col3:
+        st.markdown("""
+            <div class="challenge-box" style="border-left-color: #f59e0b;">
+                <h4>💰 ROI mesurable</h4>
+                <p><strong>Problème :</strong> Difficulté à prouver la valeur des investissements data.</p>
+                <p><strong>Solution :</strong> Métriques concrètes (gain de temps, précision, réduction 
+                coûts) pour justifier chaque initiative analytique.</p>
+            </div>
+        """, unsafe_allow_html=True)
 
 st.divider()
 
