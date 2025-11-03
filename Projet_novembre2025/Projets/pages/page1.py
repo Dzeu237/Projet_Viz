@@ -307,6 +307,30 @@ elif st.session_state.current_page == 'Operational':
             barmode='group'
         )
         st.plotly_chart(fig4, width='content')
+elif st.session_state.current_page == 'Quality':
+    st.subheader("Visualisations des Metrics Qualité")
+    col1, col2 = st.columns(2)
+    with col1:
+        # Graphique 1: Taux de Défaut par type de produit
+        defect_rate_by_product = df.groupby('Product_type')['Defect_rates'].mean().reset_index().sort_values(by='Defect_rates', ascending=False)
+        fig1 = px.bar(defect_rate_by_product, x='Product_type', y='Defect_rates',
+                      title='Taux de Défaut par Type de Produit',
+                      text=[f'{val:,.2f} %' for val in defect_rate_by_product['Defect_rates']]
+                      )
+        fig1.update_traces(textposition='outside', marker_color='salmon')
+        st.plotly_chart(fig1, width='content')
+    with col2:
+        # Graphique 2: Taux de Réussite d'Inspection par type de produit
+        inspection_success_by_product = df.groupby('Product_type').apply(lambda x: (x[x['Inspection_results'] == 'Pass'].shape[0] / x.shape[0]) * 100).reset_index(name='Taux_Réussite_Inspection').sort_values(by='Taux_Réussite_Inspection', ascending=False)
+        fig2 = px.bar(inspection_success_by_product, x='Product_type', y='Taux_Réussite_Inspection',
+                      title='Taux de Réussite d\'Inspection par Type de Produit',
+                      text=[f'{val:,.2f} %' for val in inspection_success_by_product['Taux_Réussite_Inspection']]
+                      )
+        fig2.update_traces(textposition='outside', marker_color='mediumseagreen')
+        st.plotly_chart(fig2, width='content')
+if st.session_state.current_page == 'Commercial':
+    st.subheader("Visualisations des Metrics Commerciales")
+    
 
 else:
     st.info("Veuillez sélectionner l'onglet 'Financial Metrics' pour afficher ces visualisations.")

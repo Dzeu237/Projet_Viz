@@ -239,7 +239,7 @@ st.divider()
 st.markdown("### 📌 Découvrez comment ces projets peuvent s'appliquer à vos défis organisationnels")
 
 # --- Barre latérale de navigation ---
-col_nav1, col_nav2, col_nav3 = st.columns([ 1, 1, 1])
+col_nav1, col_nav2, col_nav3, col_nav4 = st.columns([ 1, 1, 1, 1])
 
 with col_nav1:
     if st.button(label="Financial Health Analysis" ,icon="💄" ,use_container_width=True):
@@ -252,6 +252,10 @@ with col_nav2:
 with col_nav3:
     if st.button(label="Student AI Usage Trend",icon="🤖" ,use_container_width=True):
         st.switch_page("pages/page3.py")
+
+with col_nav4:
+    if st.button(label="Spotify Song Recommender",icon="🎵" ,use_container_width=True):
+        st.switch_page("pages/page4.py")
 
 # Footer
 st.markdown("---")
