@@ -150,10 +150,8 @@ st.divider()
 
 # Les défis métier
 st.markdown("## 🎯 Les défis métier adressés")
-col1, col2, col3 = st.columns(spec=[1, 1, 1], gap="large")
 
-with col1:
-    st.markdown("""
+st.markdown("""
         <div class="challenge-box" style="border-left-color: #8b5cf6;">
             <h4>👥 Compréhension des comportements</h4>
             <p><strong>Problème :</strong> Les organisations éducatives et RH peinent à personnaliser 
@@ -163,8 +161,7 @@ with col1:
         </div>
     """, unsafe_allow_html=True)
 
-with col2:
-    st.markdown("""
+st.markdown("""
         <div class="challenge-box" style="border-left-color: #10b981;">
             <h4>📈 Pilotage stratégique</h4>
             <p><strong>Problème :</strong> 67% des dirigeants manquent de visibilité sur la santé 
@@ -174,8 +171,7 @@ with col2:
         </div>
     """, unsafe_allow_html=True)
     
-    with col3:
-        st.markdown("""
+st.markdown("""
             <div class="challenge-box" style="border-left-color: #f59e0b;">
                 <h4>💰 ROI mesurable</h4>
                 <p><strong>Problème :</strong> Difficulté à prouver la valeur des investissements data.</p>
@@ -189,23 +185,26 @@ st.divider()
 # Valeur ajoutée
 st.markdown("## 💼 La valeur d'un Data Analyst dans l'entreprise moderne")
 
+col1, col2, col3 = st.columns(3)
 
-st.markdown("""
+with col1:
+    st.markdown("""
         <div class="metric-box">
             <h2>25-30%</h2>
             <p>Amélioration moyenne de la productivité grâce à l'automatisation des analyses</p>
         </div>
     """, unsafe_allow_html=True)
 
-st.markdown("""
+with col2:
+    st.markdown("""
         <div class="metric-box">
             <h2>15-20%</h2>
             <p>Réduction des coûts opérationnels via l'optimisation data-driven</p>
         </div>
     """, unsafe_allow_html=True)
 
-
-st.markdown("""
+with col3:
+    st.markdown("""
         <div class="metric-box">
             <h2>3-5x</h2>
             <p>ROI typique des investissements en analytics selon McKinsey</p>
