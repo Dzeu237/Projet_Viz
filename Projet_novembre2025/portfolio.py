@@ -425,7 +425,7 @@ elif st.session_state.current_page == 'contact':
                 </a>
             </p>
         </div>
-        """, unsafe_allow_html=False)
+        """, unsafe_allow_html=True)
         
         st.markdown("---")
         st.markdown("### 🎯 Disponibilité")
