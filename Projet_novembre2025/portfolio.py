@@ -388,6 +388,12 @@ elif st.session_state.current_page == 'projects':
             <p style="color: #999;">📅 En développement...</p>
         </div>
         """, unsafe_allow_html=True)
+    
+# Call to action
+st.markdown("### 📌 Découvrez comment ces projets peuvent s'appliquer à vos défis organisationnels")
+
+if st.button("🔍 Explorer les projets", use_container_width=True, type="primary"):
+    st.switch_page("https://github.com/Dzeu237/Projet_Viz/blob/main/Projet_novembre2025/Projets/app.py")
 
 
 # ==================== PAGE CONTACT ====================
