@@ -214,7 +214,7 @@ if st.session_state.current_page == 'home':
 elif st.session_state.current_page == 'about':
     st.markdown('<h1 class="section-title">À Propos de Moi</h1>', unsafe_allow_html=True)
     
-    col1, col2 = st.columns([2, 1])
+    col1, col2 = st.columns([1, 2])
     
     with col1:
         st.markdown("""
