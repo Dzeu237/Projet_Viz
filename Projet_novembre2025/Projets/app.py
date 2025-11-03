@@ -124,34 +124,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- ENTETE ---
-st.markdown("---")
-st.title("**Description**")
-st.markdown("---")
-st.write(
-    """
-    Cette plateforme d'expérimentation en traitement du langage naturel (NLP) est conçue pour permettre aux utilisateurs de tester et d'évaluer divers modèles et techniques NLP. 
-    base sur des problematique d'entreprise telle que:
-    * Analyse des tickets de support client pour identifier les tendances et améliorer le service.
-    * Prédiction de l'adéquation des candidats aux postes à pourvoir en utilisant des modèles de matching avancés.
-    * Analyse de sentiment des articles de presse et des publications sur les réseaux sociaux pour comprendre l'opinion publique.
-    """
-)
-
-# --- Barre latérale de navigation ---
-col_nav1, col_nav2, col_nav3 = st.columns([ 1, 1, 1])
-
-with col_nav1:
-    if st.button(label="Financial Health Analysis" ,icon="📊" ,use_container_width=True):
-        st.switch_page("pages/page1.py")
-
-with col_nav2:
-    if st.button(label="Easy Model Prediction",icon="🏠" ,use_container_width=True):
-        st.switch_page("pages/page2.py")
-
-with col_nav3:
-    if st.button(label="Student AI Usage Trend",icon="🤖" ,use_container_width=True):
-        st.switch_page("pages/page3.py")
 
 # Header principal
 st.markdown("""
@@ -178,8 +150,7 @@ st.divider()
 
 # Les défis métier
 st.markdown("## 🎯 Les défis métier adressés")
-
-col1, col2 = st.columns(2)
+col1, col2 = st.columns(spec=[2, 1], gap="large")
 
 with col1:
     st.markdown("""
@@ -280,10 +251,20 @@ st.divider()
 # Call to action
 st.markdown("### 📌 Découvrez comment ces projets peuvent s'appliquer à vos défis organisationnels")
 
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    if st.button("🔍 Explorer les projets", use_container_width=True, type="primary"):
-        st.success("Navigation vers les projets...")
+# --- Barre latérale de navigation ---
+col_nav1, col_nav2, col_nav3 = st.columns([ 1, 1, 1])
+
+with col_nav1:
+    if st.button(label="Financial Health Analysis" ,icon="📊" ,use_container_width=True):
+        st.switch_page("pages/page1.py")
+
+with col_nav2:
+    if st.button(label="Easy Model Prediction",icon="🏠" ,use_container_width=True):
+        st.switch_page("pages/page2.py")
+
+with col_nav3:
+    if st.button(label="Student AI Usage Trend",icon="🤖" ,use_container_width=True):
+        st.switch_page("pages/page3.py")
 
 # Footer
 st.markdown("---")
