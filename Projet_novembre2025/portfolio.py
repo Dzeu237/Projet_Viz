@@ -251,7 +251,7 @@ elif st.session_state.current_page == 'about':
         
         st.markdown("### 🌍 Langues")
         st.markdown("🇫🇷 **Français** - Natif")
-        st.markdown("🇬🇧 **Anglais** - TOEIC 750/990")
+        st.markdown("🇬🇧 **Anglais** - TOEIC 825/990")
 
 # ==================== PAGE PROJECTS LIST ====================
 elif st.session_state.current_page == 'projects':
@@ -263,7 +263,7 @@ elif st.session_state.current_page == 'projects':
     # Projet 1: Student Performance Dashboard
     st.markdown("""
     <div class="project-card">
-        <h2>📊 Dashboard Student Performance Insights</h2>
+        <h2>Easy Model Prediction</h2>
         <p style="color: #666; font-size: 0.9rem;">Septembre 2024</p>
     </div>
     """, unsafe_allow_html=True)
@@ -272,26 +272,25 @@ elif st.session_state.current_page == 'projects':
     with col1:
         st.markdown("""
         **Description:**  
-        Plateforme d'analyse prédictive des performances étudiantes avec collecte 
-        de données en temps réel et modèle de machine learning.
+        Plateforme AutoML de Prédiction et Analyse de Données.
         
         **Réalisations clés:**
-        - ✅ Collecte et préparation de données en temps réel depuis une source en ligne
-        - ✅ Analyse et calcul d'indicateurs de performance pertinents
-        - ✅ Identification des patterns et modèle prédictif avec **75% de précision**
-        - ✅ Interface interactive pour visualiser les tendances
+        - ✅ Exploration automatisée de données CSV
+        - ✅ Implémentation de pipelines de preprocessing
+        - ✅ Intégration de multiples algorithmes ML
+        - ✅ Création d'un système de comparaison des modèles avec métriques de performance
+        - ✅ Déploiement d'un module de prédiction sur échantillon de test
         """)
     
     with col2:
         st.markdown("**🛠️ Technologies**")
         st.markdown('<span class="skill-badge">Streamlit</span>', unsafe_allow_html=True)
         st.markdown('<span class="skill-badge">Pandas</span>', unsafe_allow_html=True)
-        st.markdown('<span class="skill-badge">Folium</span>', unsafe_allow_html=True)
         st.markdown('<span class="skill-badge">Scikit-learn</span>', unsafe_allow_html=True)
         
         st.markdown("**📈 Métriques**")
-        st.metric("Précision ML", "75%")
-        st.metric("Sources de données", "Temps réel")
+        st.metric("Gain de temps", "75%")
+        st.metric("Précision moyenne", "85-92%")
         
 
         
@@ -301,7 +300,7 @@ elif st.session_state.current_page == 'projects':
     # Projet 2: Retail Analytics
     st.markdown("""
     <div class="project-card">
-        <h2>🛒 Analyse Retail - Performances Multi-Magasins</h2>
+        <h2>Tableau de Bord Décisionnel pour Diagnostic d'Entreprise</h2>
         <p style="color: #666; font-size: 0.9rem;">Janvier 2025</p>
     </div>
     """, unsafe_allow_html=True)
@@ -311,25 +310,23 @@ elif st.session_state.current_page == 'projects':
         st.markdown("""
         **Description:**  
         Pipeline ETL complet pour l'analyse des performances commerciales d'une chaîne 
-        de magasins avec dashboard dynamique Power BI.
+        de magasins.
         
         **Réalisations clés:**
-        - ✅ Pipeline d'extraction et traitement de données de ventes multi-magasins
-        - ✅ Modélisation des données et analyse des KPIs commerciaux
-        - ✅ Identification des tendances de vente par magasin et catégorie
-        - ✅ Dashboard dynamique pour le suivi quotidien des performances
+        - ✅ Segmentation des metriques en 4 dimensions (Financière, Opérationnelle, Qualité, Commerciale)
+        - ✅ Création de visualisations dynamiques avec des recommandations actionnables
         """)
     
     with col2:
         st.markdown("**🛠️ Technologies**")
-        st.markdown('<span class="skill-badge">MySQL</span>', unsafe_allow_html=True)
-        st.markdown('<span class="skill-badge">Python</span>', unsafe_allow_html=True)
-        st.markdown('<span class="skill-badge">Power BI</span>', unsafe_allow_html=True)
-        st.markdown('<span class="skill-badge">OpenAI</span>', unsafe_allow_html=True)
+        st.markdown('<span class="skill-badge">Streamlit</span>', unsafe_allow_html=True)
+        st.markdown('<span class="skill-badge">Ploty</span>', unsafe_allow_html=True)
+        st.markdown('<span class="skill-badge">Pandas</span>', unsafe_allow_html=True)
         
-        st.markdown("**📊 KPIs suivis**")
-        st.metric("Magasins analysés", "Multiple")
-        st.metric("Fréquence update", "Quotidien")
+        st.markdown("**📈 Métriques**")
+        st.metric("Réduction délai décisionnel", "60%")
+        st.metric("Couverture", "4 axes stratégiques")
+
 
     
     st.markdown("---")
@@ -337,7 +334,7 @@ elif st.session_state.current_page == 'projects':
     # Projet 3: Architecture Database
     st.markdown("""
     <div class="project-card">
-        <h2>🗄️ Architecture BD - Plateforme Réseau Social</h2>
+        <h2>Analyse Comportementale : Utilisation de l'IA par les Étudiants</h2>
         <p style="color: #666; font-size: 0.9rem;">Novembre 2024</p>
     </div>
     """, unsafe_allow_html=True)
@@ -350,10 +347,10 @@ elif st.session_state.current_page == 'projects':
         de réseau social type Facebook, respectant les propriétés ACID.
         
         **Réalisations clés:**
-        - ✅ Analyse approfondie des relations entre entités
-        - ✅ Conception de tables et relations cohérentes
-        - ✅ Optimisation des requêtes et indexation
-        - ✅ Documentation détaillée des choix d'architecture ACID
+        - ✅ Collecte et nettoyage de données d'utilisation de l'IA académique
+        - ✅ Application d'algorithmes de clustering pour segmentation
+        - ✅ Création de visualisations pour représentation multi-dimensionnelle
+        - ✅ Production de recommandations pédagogiques par segment identifié
         """)
     
     with col2:
@@ -363,8 +360,8 @@ elif st.session_state.current_page == 'projects':
         st.markdown('<span class="skill-badge">SQL</span>', unsafe_allow_html=True)
         
         st.markdown("**🎯 Concepts**")
-        st.metric("Propriétés ACID", "✓")
-        st.metric("Scalabilité", "High")
+        st.metric("Segmentation", "✓")
+        st.metric("Variance expliquée", "78%")
 
     
     st.markdown("---")

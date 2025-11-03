@@ -37,14 +37,35 @@ st.markdown("""
         display: flex;
         gap: 1rem;
     }
-    
     .main-header {
-        font-size: 3.5rem;
-        font-weight: 700;
-        background: linear-gradient(120deg, #2E3192 0%, #1BFFFF 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 0.5rem;
+        text-align: center;
+        padding: 2rem 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+    }
+    .section-box {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 10px;
+        border-left: 5px solid #667eea;
+        margin-bottom: 1.5rem;
+    }
+    .metric-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        text-align: center;
+    }
+    .challenge-box {
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        border-left: 4px solid;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .sub-header {
         font-size: 1.5rem;
@@ -131,4 +152,145 @@ with col_nav2:
 with col_nav3:
     if st.button(label="Student AI Usage Trend",icon="🤖" ,use_container_width=True):
         st.switch_page("pages/page3.py")
+
+# Header principal
+st.markdown("""
+    <div class="main-header">
+        <h1>📊 Avant-Propos</h1>
+        <h3>Transformer les données en décisions stratégiques</h3>
+    </div>
+""", unsafe_allow_html=True)
+
+# Introduction
+st.markdown("## 💡 Pourquoi ce portfolio ?")
+
+st.markdown("""
+Dans un monde professionnel où **80% des entreprises collectent des données** mais 
+seulement **30% les exploitent efficacement**, le rôle du Data Analyst devient crucial. 
+Ce portfolio présente des solutions concrètes aux défis quotidiens rencontrés par les organisations 
+dans leur quête de transformation data-driven.
+
+Chaque projet répond à une **problématique réelle du monde du travail**, démontrant comment l'analyse 
+de données peut générer de la valeur mesurable et des décisions éclairées.
+""")
+
+st.divider()
+
+# Les défis métier
+st.markdown("## 🎯 Les défis métier adressés")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("""
+        <div class="challenge-box" style="border-left-color: #3b82f6;">
+            <h4>📊 Démocratisation de l'IA</h4>
+            <p><strong>Problème :</strong> Les équipes perdent 40% de leur temps sur des tâches 
+            répétitives de modélisation.</p>
+            <p><strong>Solution :</strong> Automatisation du pipeline ML permettant aux non-experts 
+            d'exploiter la puissance prédictive sans compétences avancées en code.</p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+        <div class="challenge-box" style="border-left-color: #8b5cf6;">
+            <h4>👥 Compréhension des comportements</h4>
+            <p><strong>Problème :</strong> Les organisations éducatives et RH peinent à personnaliser 
+            leurs approches par manque de segmentation.</p>
+            <p><strong>Solution :</strong> Analyse comportementale révélant des patterns cachés pour 
+            adapter stratégies pédagogiques et formations.</p>
+        </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("""
+        <div class="challenge-box" style="border-left-color: #10b981;">
+            <h4>📈 Pilotage stratégique</h4>
+            <p><strong>Problème :</strong> 67% des dirigeants manquent de visibilité sur la santé 
+            réelle de leur entreprise.</p>
+            <p><strong>Solution :</strong> Tableau de bord holistique fournissant une vision 360° 
+            avec indicateurs actionnables pour anticiper les risques.</p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+        <div class="challenge-box" style="border-left-color: #f59e0b;">
+            <h4>💰 ROI mesurable</h4>
+            <p><strong>Problème :</strong> Difficulté à prouver la valeur des investissements data.</p>
+            <p><strong>Solution :</strong> Métriques concrètes (gain de temps, précision, réduction 
+            coûts) pour justifier chaque initiative analytique.</p>
+        </div>
+    """, unsafe_allow_html=True)
+
+st.divider()
+
+# Valeur ajoutée
+st.markdown("## 💼 La valeur d'un Data Analyst dans l'entreprise moderne")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.markdown("""
+        <div class="metric-box">
+            <h2>25-30%</h2>
+            <p>Amélioration moyenne de la productivité grâce à l'automatisation des analyses</p>
+        </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("""
+        <div class="metric-box">
+            <h2>15-20%</h2>
+            <p>Réduction des coûts opérationnels via l'optimisation data-driven</p>
+        </div>
+    """, unsafe_allow_html=True)
+
+with col3:
+    st.markdown("""
+        <div class="metric-box">
+            <h2>3-5x</h2>
+            <p>ROI typique des investissements en analytics selon McKinsey</p>
+        </div>
+    """, unsafe_allow_html=True)
+
+st.divider()
+
+# Mon approche
+st.markdown("## 🚀 Mon approche")
+
+st.markdown("""
+<div class="section-box">
+    <h4>1️⃣ Orientation business</h4>
+    <p>Chaque analyse commence par la compréhension de l'enjeu métier, pas par la technologie</p>
+</div>
+
+<div class="section-box">
+    <h4>2️⃣ Accessibilité</h4>
+    <p>Des outils pensés pour les utilisateurs métier, avec interfaces intuitives et automatisation</p>
+</div>
+
+<div class="section-box">
+    <h4>3️⃣ Impact mesurable</h4>
+    <p>Des métriques claires pour quantifier la valeur créée et justifier les investissements</p>
+</div>
+""", unsafe_allow_html=True)
+
+st.divider()
+
+# Call to action
+st.markdown("### 📌 Découvrez comment ces projets peuvent s'appliquer à vos défis organisationnels")
+
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    if st.button("🔍 Explorer les projets", use_container_width=True, type="primary"):
+        st.success("Navigation vers les projets...")
+
+# Footer
+st.markdown("---")
+st.markdown("""
+    <div style="text-align: center; color: #666; padding: 1rem;">
+        <p>💡 <em>Ce portfolio démontre des compétences concrètes en analyse de données, 
+        machine learning et visualisation, applicables immédiatement en entreprise.</em></p>
+    </div>
+""", unsafe_allow_html=True)
 
