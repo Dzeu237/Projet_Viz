@@ -10,7 +10,7 @@ import prince
 # --- Configuration de la page Streamlit ---
 st.set_page_config(
     page_title="Plateforme IA Stutent Usage Analytics",
-    page_icon=":bar_chart:",
+    page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded"
 )

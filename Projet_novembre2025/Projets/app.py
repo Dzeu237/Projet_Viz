@@ -242,7 +242,7 @@ st.markdown("### 📌 Découvrez comment ces projets peuvent s'appliquer à vos 
 col_nav1, col_nav2, col_nav3 = st.columns([ 1, 1, 1])
 
 with col_nav1:
-    if st.button(label="Financial Health Analysis" ,icon="📊" ,use_container_width=True):
+    if st.button(label="Financial Health Analysis" ,icon="💄" ,use_container_width=True):
         st.switch_page("pages/page1.py")
 
 with col_nav2:
