@@ -189,26 +189,23 @@ st.divider()
 # Valeur ajoutée
 st.markdown("## 💼 La valeur d'un Data Analyst dans l'entreprise moderne")
 
-col1, col2, col3 = st.columns(3)
 
-with col1:
-    st.markdown("""
+st.markdown("""
         <div class="metric-box">
             <h2>25-30%</h2>
             <p>Amélioration moyenne de la productivité grâce à l'automatisation des analyses</p>
         </div>
     """, unsafe_allow_html=True)
 
-with col2:
-    st.markdown("""
+st.markdown("""
         <div class="metric-box">
             <h2>15-20%</h2>
             <p>Réduction des coûts opérationnels via l'optimisation data-driven</p>
         </div>
     """, unsafe_allow_html=True)
 
-with col3:
-    st.markdown("""
+
+st.markdown("""
         <div class="metric-box">
             <h2>3-5x</h2>
             <p>ROI typique des investissements en analytics selon McKinsey</p>
