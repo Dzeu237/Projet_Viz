@@ -230,7 +230,7 @@ elif st.session_state.current_page == 'about':
         - Data Visualisation
         - Machine Learning
         - Advanced Database
-        - Optimisation
+        - Big Data & Cloud Computing
         - Gestion Financière
         """)
         
@@ -248,6 +248,14 @@ elif st.session_state.current_page == 'about':
     
     with col2:
         st.markdown("### 🌟 Soft Skills")
+        st.markdown("""
+- Storytelling
+- Visualisation des Données orientée résultat
+- Communication claire 
+- Résilience et Persévérance face  aux données complexes
+- Esprit Critique et Curiosité Analytique
+- Autonomie et gestion de projet
+                    """)
         
         
         st.markdown("### 🌍 Langues")
@@ -398,45 +406,16 @@ elif st.session_state.current_page == 'contact':
     col1, col2 = st.columns([1, 1])
     
     with col1:
+
         st.markdown("### 📬 Informations de Contact")
-        
-        st.markdown("""
-        <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin-top: 1rem;">
-            <p style="font-size: 1.1rem; margin-bottom: 1rem;">
-                <strong>📧 Email:</strong><br>
-                <a href="mailto:claude-bernard.dzeugueu@efrei.net" class="contact-link">
-                    claude-bernard.dzeugueu@efrei.net
-                </a>
-            </p>
-            
-            <p style="font-size: 1.1rem; margin-bottom: 1rem;">
-                <strong>📱 Téléphone:</strong><br>
-                <a href="tel:0744516792" class="contact-link">07 44 51 67 92</a>
-            </p>
-            
-            <p style="font-size: 1.1rem; margin-bottom: 1rem;">
-                <strong>📍 Localisation:</strong><br>
-                Paris et Périphéries, France
-            </p>
-            
-            <p style="font-size: 1.1rem; margin-bottom: 0;">
-                <strong>💼 LinkedIn:</strong><br>
-                <a href="https://linkedin.com/in/claude-dzeugueu" class="contact-link" target="_blank">
-                    linkedin.com/in/claude-dzeugueu
-                </a>
-            </p>
-        </div>
-                """, unsafe_allow_html=True)
-        
         st.markdown("---")
         st.markdown("### 🎯 Disponibilité")
         st.success("✅ Disponible pour un stage dès **Janvier 2026**")
         st.info("📅 Stage Césure M1 - 6 mois minimum")
     
     with col2:
-        st.markdown("### ✉️ Envoyez-moi un message")
-        
-        
+
+        st.markdown("### ✉️ Envoyez-moi un message")    
         col_a, col_b, col_c = st.columns(3)
         with col_a:
             st.markdown("[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com)")
