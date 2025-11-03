@@ -421,9 +421,8 @@ elif st.session_state.current_page == 'contact':
         st.markdown("### ✉️ Envoyez-moi un message")    
         col_a, col_b, col_c = st.columns(3)
         with col_a:
-            st.markdown("[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com)")
-        with col_b:
-            st.markdown("[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com)")
+            st.markdown("[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/claude-bernard-dzeugueu-9725471b4/)")
+
         with col_c:
             st.markdown("[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:claude-bernard.dzeugueu@efrei.net)")
 
@@ -432,6 +431,5 @@ st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #666; padding: 2rem 0;">
     <p>© 2025 Claude Dzeugueu | Data Analyst Portfolio</p>
-    <p style="font-size: 0.9rem;">Conçu avec Streamlit 🎈 | Propulsé par Python 🐍</p>
 </div>
 """, unsafe_allow_html=True)
