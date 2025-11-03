@@ -234,17 +234,7 @@ elif st.session_state.current_page == 'about':
         - Gestion Financière
         """)
         
-        st.markdown("---")
-        
-        st.markdown("### 🎯 Objectifs Professionnels")
-        st.markdown("""
-        Je suis à la recherche d'un **stage de césure M1** en tant que **Data Analyst** 
-        pour mettre en pratique mes compétences en analyse de données, visualisation 
-        et machine learning dans un environnement professionnel stimulant.
-        
-        Mon objectif est de contribuer à des projets data-driven qui génèrent un impact 
-        mesurable sur la performance business.
-        """)
+
     
     with col2:
         st.markdown("### 🌟 Soft Skills")
@@ -261,6 +251,18 @@ elif st.session_state.current_page == 'about':
         st.markdown("### 🌍 Langues")
         st.markdown("🇫🇷 **Français** - Natif")
         st.markdown("🇬🇧 **Anglais** - TOEIC 825/990")
+    
+    st.markdown("---")
+        
+    st.markdown("### 🎯 Objectifs Professionnels")
+    st.markdown("""
+        Je suis à la recherche d'un **stage de césure M1** en tant que **Data Analyst** 
+        pour mettre en pratique mes compétences en analyse de données, visualisation 
+        et machine learning dans un environnement professionnel stimulant.
+        
+        Mon objectif est de contribuer à des projets data-driven qui génèrent un impact 
+        mesurable sur la performance business.
+        """)
 
 # ==================== PAGE PROJECTS LIST ====================
 elif st.session_state.current_page == 'projects':
