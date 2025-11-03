@@ -23,8 +23,11 @@ st.set_page_config(
 
 # --- ENTETE ---
 st.markdown("---")
-st.title("**Test Model**")
+st.title("**Easy Model Prediction**")
 st.markdown("---")
+
+st.markdown("""
+Bienvenue sur la plateforme **Easy Model Prediction** ! Cette application vous permet de charger vos jeux de données et pouvoir les explorer, transformer, et tester différents modèles de machine learning pour des tâches de classification et de régression. Suivez les étapes dans la barre de navigation ci-dessus pour commencer votre analyse.""")
 
 # Fonction pour entraîner et évaluer les modèles de classification
 def train_classification_models(X_train, y_train, X_test, y_test, models_to_run):
