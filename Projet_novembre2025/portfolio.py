@@ -393,7 +393,7 @@ elif st.session_state.current_page == 'projects':
 st.markdown("### 📌 Découvrez comment ces projets peuvent s'appliquer à vos défis organisationnels")
 
 if st.button("🔍 Explorer les projets", use_container_width=True, type="primary"):
-    st.page_link(page="https://github.com/Dzeu237/Projet_Viz/blob/main/Projet_novembre2025/Projets/app.py",label="Voir le code source sur GitHub")
+    st.page_link(page="https://github.com/Dzeu237/Projet_Viz/blob/main/Projet_novembre2025/Projets/app.py",label="Voir le code source sur GitHub",Width = "content")
 
 
 # ==================== PAGE CONTACT ====================
