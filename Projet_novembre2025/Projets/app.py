@@ -150,7 +150,7 @@ st.divider()
 
 # Les défis métier
 st.markdown("## 🎯 Les défis métier adressés")
-col1, col2 = st.columns(spec=[2, 1], gap="large")
+col1, col2 = st.columns(spec=[1, 1], gap="large")
 
 with col1:
     st.markdown("""
