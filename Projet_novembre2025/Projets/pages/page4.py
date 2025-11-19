@@ -152,7 +152,7 @@ def get__songs_by_artist(token, artist_id):
 year = st.slider(
     "Select Year",
     min_value=1970,
-    max_value=time.now().year,
+    max_value=datetime.now().year,
     value=(2015,2010),
     step=1
 )
