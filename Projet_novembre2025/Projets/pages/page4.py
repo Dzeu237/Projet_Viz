@@ -4,7 +4,7 @@ import pandas as pd
 from requests import post, get,exceptions
 import base64
 import json
-import datetime as time
+from datetime import datetime,time
 import pycountry
 from math import ceil
 
