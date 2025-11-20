@@ -49,28 +49,46 @@ st.markdown("""
 # Title
 st.title("🎵 Spotify Time Machine")
 st.markdown("### Explore tracks from 2013 to 2020")
-client_id = st.secrets.get("SPOTIFY_CLIENT_ID", "")
-client_secret = st.secrets.get("SPOTIFY_SECRET_CODE", "")
 
 #Fonctions to Use Spotify API    
 @st.cache_data
 def get_token():
-    auth_string = client_id + ':' + client_secret
-    auth_bytes = auth_string.encode('utf-8')
-    auth_base64 = str(base64.b64encode(auth_bytes), 'utf-8')
-    url = 'https://accounts.spotify.com/api/token'
+    """
+    Get a fresh Spotify access token using Client Credentials flow.
+    Stores token in st.session_state for reuse.
+    """
+    if "spotify_token" in st.session_state:
+        return st.session_state.spotify_token
+
+    client_id = st.secrets.get("SPOTIFY_CLIENT_ID", "")
+    client_secret = st.secrets.get("SPOTIFY_SECRET_CODE", "")
+    if not client_id or not client_secret:
+        st.error("⚠️ Please provide Spotify API credentials in Streamlit secrets.")
+        return None
+
+    auth_string = f"{client_id}:{client_secret}"
+    auth_bytes = auth_string.encode("utf-8")
+    auth_base64 = base64.b64encode(auth_bytes).decode("utf-8")
+
+    url = "https://accounts.spotify.com/api/token"
     headers = {
-        'Authorization': 'Basic ' + auth_base64,
-        'Content-Type': 'application/x-www-form-urlencoded'
+        "Authorization": f"Basic {auth_base64}",
+        "Content-Type": "application/x-www-form-urlencoded"
     }
-    data = {'grant_type': 'client_credentials'}
-    result = post(url, headers=headers, data=data)
-    json_result = json.loads(result.content)
-    token=json_result['access_token']
-    return token
+    data = {"grant_type": "client_credentials"}
+
+    try:
+        response = post(url, headers=headers, data=data)
+        response.raise_for_status()
+        token = response.json()["access_token"]
+        st.session_state.spotify_token = token
+        return token
+    except exceptions.RequestException as e:
+        st.error(f"Error getting Spotify token: {e}")
+        return None
 
 def get_auth_header(token):
-    return {'Authorization': 'Bearer ' + token}
+    return {'Authorization': f'Bearer {token}'}
 
 def convert_country(country):
     try:
@@ -129,25 +147,53 @@ def strategy_1_year_by_year(start_year, end_year, genre=None):
         
         return all_albums
 
-@st.cache_data
-def search_artist(token, artist_name,start, end):
-    url = 'https://api.spotify.com/v1/search'
-    headers = get_auth_header(token)
-    query = f'?q={artist_name}&type=artist&limit=1&year={start}-{end}'
-    query_url = url + query
-    result = get(query_url, headers=headers)
-    json_result = json.loads(result.content)['artists']['items']
-    if len(json_result) == 0:
-        return None
-    return json_result[0]
 
-@st.cache_data
-def get__songs_by_artist(token, artist_id):
-    url = f'https://api.spotify.com/v1/artists/{artist_id}/top-tracks'
+def search_artist(artist_name):
+    """
+    Search for an artist by name. Returns a dict or None.
+    """
+    token = get_token()
+    if not token:
+        return None
+
+    url = "https://api.spotify.com/v1/search"
     headers = get_auth_header(token)
-    result = get(url, headers=headers)
-    json_result = json.loads(result.content)
-    return json_result
+    params = {"q": artist_name, "type": "artist", "limit": 1}
+
+    try:
+        response = get(url, headers=headers, params=params)
+        response.raise_for_status()
+        items = response.json().get("artists", {}).get("items", [])
+        return items[0] if items else None
+    except exceptions.RequestException as e:
+        st.error(f"Spotify API error: {e}")
+        return None
+
+
+def get__songs_by_artist(artist_id,market='US'):
+    """
+    Fetch top 5 tracks of an artist from Spotify.
+    Requires artist_id and optional market (default "US").
+    """
+    token = get_token()
+    if not token:
+        return []
+
+    url = f"https://api.spotify.com/v1/artists/{artist_id}/top-tracks"
+    headers = get_auth_header(token)
+    params = {"market": market}
+
+    try:
+        response = get(url, headers=headers, params=params)
+        response.raise_for_status()
+        tracks = response.json().get("tracks", [])[:5]
+        return tracks
+    except exceptions.HTTPError as e:
+        st.error(f"Spotify API error: {e}")
+        return []
+    except exceptions.RequestException as e:
+        st.error(f"Request error: {e}")
+        return []
 
 # Year slider
 year = st.slider(
@@ -163,9 +209,6 @@ st.markdown(f"### 📅 Searching from the year: **{year[0]}** to **{year[1]}**")
 
 # Search button
 if st.button("🔍 Search Albums", type="primary", width='content'):
-    if not client_id or not client_secret:
-        st.error("⚠️ Please enter your Spotify API credentials in the sidebar!")
-    else:
         albums = strategy_1_year_by_year(year[0], year[1])
         st.write(f"Found {len(albums)} albums using year-by-year strategy")
 
@@ -204,9 +247,9 @@ if 'df' in st.session_state:
     with tab1:
         with st.sidebar:
             art=df_albums["Artist"].sort_values().unique().tolist()
-            artist=st.selectbox(label="Artist",options=["All"]+art,width="stretch",index=0)
-            if artist != "All":
-                df_artist=df_albums[df_albums['Artist'] == artist]
+            artist_name=st.selectbox(label="Artist",options=["All"]+art,width="stretch",index=0)
+            if artist_name != "All":
+                df_artist=df_albums[df_albums['Artist'] == artist_name]
             else:
                 df_artist=df_albums.copy()
             st.markdown("**Metrique**")
@@ -328,17 +371,41 @@ if 'df' in st.session_state:
                 st.rerun()
         
     with tab2:
-        if artist == "All":
+        if artist_name == "All":
             st.warning("Choisir d'abord un artist")
         else:
-            col1,col2=st.columns([1,3])
-            with col1:
-                st.write(df_artist.head(5))
-                id=df_artist['Artist_id'].unique()
-                st.write(id[0])
-                token=get_token()
-                songs=get__songs_by_artist(token,id)
-                st.write(songs)
+            co1,co2=st.columns([1,1])
+            id=df_artist['Artist_id'].iloc[0]
+            with co1:
+                st.write(id)
+                songs=get__songs_by_artist(id)
+                liste=[]
+                for song in songs:
+                    liste.append({
+                        "song_name":song.get("name"),
+                        "album_name":song.get("album",{}).get("name"),
+                        "image":song.get("album",{}).get("images",[{}])[0].get("url"),
+                        "duration":song.get("duration_ms"),
+                        "popularity":song.get("popularity"),
+                        "track_number":song.get("track_number")
+                    })
+                df_songs=pd.DataFrame(liste)
+                st.write(df_songs)
+            
+            with co2:
+                artists=search_artist(artist_name)
+                st.write(artists)
+                liste_art=[]
+                liste_art.append({
+                        "name":artists.get("name"),
+                        "genre":artists.get("genres") or "All",
+                        "followers": artists.get("followers",{}).get("total"),
+                        "popularity": artists.get("popularity"),
+                        "image":artists.get("images",[{}])[1].get("url")
+                    })
+                df_art=pd.DataFrame(liste_art)
+                st.write(df_art)
+                
 
 
 # Footer
