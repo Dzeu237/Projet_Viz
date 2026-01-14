@@ -8,6 +8,7 @@ from datetime import datetime
 import time
 import pycountry
 from math import ceil
+import humanize
 
 # --- Configuration de la page Streamlit ---
 st.set_page_config(
@@ -229,21 +230,24 @@ if st.button("🔍 Search Albums", type="primary", width='content'):
             album_data.append(album_info)
         
         df_albums = pd.DataFrame(album_data)
+        df_albums['Artist_id']=df_albums['Artist_id'].apply(lambda x: x.split(","))
+        df_albums["Artist"]=df_albums['Artist'].apply(lambda x: x.split(","))
+        df_albums=df_albums.explode(["Artist_id"])
+        df_albums=df_albums.explode(["Artist"])
+    
+        #df_albums["market"]=df_albums["market"].apply(lambda x:x.split(','))
+        Serie_country=df_albums['market'].explode(ignore_index=True)
+        list_country=set(Serie_country)
+        iso_map={country:convert_country(country) for country in list_country}
+        df_albums['release_date']=df_albums['release_date'].apply(lambda x: x.split('-')[0].strip())
         st.session_state.df=df_albums
 # patch='Data/Album.csv'
 # df_albums=pd.read_csv(patch)
 # df_albums['release_date']=df_albums['release_date'].apply(lambda x: x.split('-')[0].strip())
 if 'df' in st.session_state:
     df_albums=st.session_state.df
-    
-    #df_albums["market"]=df_albums["market"].apply(lambda x:x.split(','))
-    Serie_country=df_albums['market'].explode(ignore_index=True)
-    list_country=set(Serie_country)
-    iso_map={country:convert_country(country) for country in list_country}
-    df_albums['release_date']=df_albums['release_date'].apply(lambda x: x.split('-')[0].strip())
-
+    df_albums=df_albums.drop_duplicates(subset=['Album_Name','Album_ID'])
     tab1,tab2=st.tabs('Visualize Album,Visualise Artist'.split(','),width= "stretch")
-
     with tab1:
         with st.sidebar:
             art=df_albums["Artist"].sort_values().unique().tolist()
@@ -253,9 +257,9 @@ if 'df' in st.session_state:
             else:
                 df_artist=df_albums.copy()
             st.markdown("**Metrique**")
-            st.metric(label="Num.Album",value=df_albums.shape[0])
+            st.metric(label="Num.Album",value=len(df_albums["Album_ID"].unique().tolist()))
             st.metric(label="Num.Artist",value=len(df_albums['Artist'].unique().tolist()))
-            st.metric(label="Num.Track",value=df_albums["Total_Tracks"].sum())
+            st.metric(label="Num.Track",value=df_albums.drop_duplicates(subset=["Album_ID"])["Total_Tracks"].sum())
 
     
 
@@ -374,13 +378,32 @@ if 'df' in st.session_state:
         if artist_name == "All":
             st.warning("Choisir d'abord un artist")
         else:
+            st.subheader("Description de l'artist",divider=True,width='content')
             co1,co2=st.columns([1,1])
             id=df_artist['Artist_id'].iloc[0]
+            
             with co1:
-                st.write(id)
-                songs=get__songs_by_artist(id)
-                liste=[]
-                for song in songs:
+                artists=search_artist(artist_name)
+                liste_art=[]
+                liste_art.append({
+                        "name":artists.get("name"),
+                        "genre":",".join(artists.get("genres")) or "All",
+                        "followers": artists.get("followers",{}).get("total"),
+                        "popularity": artists.get("popularity"),
+                        "image":artists.get("images",[{}])[1].get("url")
+                    })
+                
+                df_art=pd.DataFrame(liste_art)
+                for index,row in df_art.iterrows():
+                    st.image(image=row['image'],caption=row['name'])
+                    st.write(f"**Name: {row['name']}**")
+                    st.write(f"**genres: {row['genre']}**")
+                    st.write(f"**Followers: {humanize.metric(row['followers'])}**")
+            
+            st.subheader(f"Top Songs of {df_art['name'][0]}",divider=True,width='content')
+            songs=get__songs_by_artist(id)
+            liste=[]
+            for song in songs:
                     liste.append({
                         "song_name":song.get("name"),
                         "album_name":song.get("album",{}).get("name"),
@@ -389,27 +412,28 @@ if 'df' in st.session_state:
                         "popularity":song.get("popularity"),
                         "track_number":song.get("track_number")
                     })
-                df_songs=pd.DataFrame(liste)
-                st.write(df_songs)
-            
-            with co2:
-                artists=search_artist(artist_name)
-                st.write(artists)
-                liste_art=[]
-                liste_art.append({
-                        "name":artists.get("name"),
-                        "genre":artists.get("genres") or "All",
-                        "followers": artists.get("followers",{}).get("total"),
-                        "popularity": artists.get("popularity"),
-                        "image":artists.get("images",[{}])[1].get("url")
-                    })
-                df_art=pd.DataFrame(liste_art)
-                st.write(df_art)
+            df_songs=pd.DataFrame(liste)
+#Arrangement des chansons par popularité sur une meme ligne
+            rows = ceil(len(df_songs) / 3)
+            for row in range(rows):
+                cols = st.columns(3)
+                st.divider()
+                for col_idx in range(3):
+                    song_idx = row * 3 + col_idx
+                    if song_idx < len(df_songs):
+                        song = df_songs.iloc[song_idx]
+                        with cols[col_idx]:
+                            st.image(song["image"], width=300)
+                            st.markdown(f"### {song['song_name']}")
+                            st.markdown(f"**Album:** {song['album_name']}")
+                            st.markdown(f"**Duration:** {humanize.precisedelta(pd.to_timedelta(song['duration'], unit='ms'))}")
+                            st.markdown(f"**Popularity:** {song['popularity']}/100")
+                            st.markdown(f"**Track Number:** {song['track_number']}")
+
                 
 
 
 # Footer
-st.markdown("---")
 st.markdown("""
     <div style='text-align: center; color: #B3B3B3;'>
         <p>Made with ❤️ using Streamlit and Spotify API</p>
