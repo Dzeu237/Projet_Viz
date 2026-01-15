@@ -633,14 +633,14 @@ def render_recommendations_tab():
 # APPLICATION PRINCIPALE
 # ============================================================================
 
-
+def main():
     """Fonction principale de l'application"""
     
     # En-tête
-st.title("**🎵 Spotify Songs Recommender**")
-st.markdown("---")
+    st.title("**🎵 Spotify Songs Recommender**")
+    st.markdown("---")
     
-st.markdown("""
+    st.markdown("""
     ### Bienvenue sur Spotify Songs Recommender!
     
     Cette application vous permet de découvrir des chansons similaires à vos morceaux préférés 
@@ -649,15 +649,15 @@ st.markdown("""
     📱 Explorez la vaste bibliothèque de Spotify et découvrez de nouveaux artistes !
     """)
     
-st.markdown("---")
+    st.markdown("---")
     
     # Section de recherche d'années
-st.markdown("## 🕰️ Spotify Time Machine")
-st.markdown("### Explorez la musique à travers les décennies")
+    st.markdown("## 🕰️ Spotify Time Machine")
+    st.markdown("### Explorez la musique à travers les décennies")
     
-col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
     
-with col1:
+    with col1:
         start_year = st.slider(
             "📅 Année de début",
             min_value=1970,
@@ -666,7 +666,7 @@ with col1:
             step=1
         )
     
-with col2:
+    with col2:
         end_year = st.slider(
             "📅 Année de fin",
             min_value=start_year,
@@ -675,19 +675,19 @@ with col2:
             step=1
         )
     
-st.markdown(f"### 🔍 Recherche de **{start_year}** à **{end_year}**")
+    st.markdown(f"### 🔍 Recherche de **{start_year}** à **{end_year}**")
     
     # Bouton de recherche
-col_btn1, col_btn2, col_btn3 = st.columns([1, 2, 1])
+    col_btn1, col_btn2, col_btn3 = st.columns([1, 2, 1])
     
-with col_btn2:
+    with col_btn2:
         search_clicked = st.button(
             "🔍 Rechercher les Albums",
             type="primary",
             width='content'
         )
     
-if search_clicked:
+    if search_clicked:
         with st.spinner(f"🔍 Recherche des albums de {start_year} à {end_year}..."):
             albums = strategy_1_year_by_year(start_year, end_year)
             
@@ -699,7 +699,7 @@ if search_clicked:
                 st.warning("⚠️ Aucun album trouvé pour cette période.")
     
     # Affichage des onglets si des données sont disponibles
-if 'df' in st.session_state:
+    if 'df' in st.session_state:
         st.markdown("---")
         
         df_albums = st.session_state.df
@@ -748,13 +748,18 @@ if 'df' in st.session_state:
         with tab3:
             render_recommendations_tab()
     
-else:
+    else:
         st.info("👆 Veuillez d'abord rechercher des albums en utilisant le bouton ci-dessus.")
     
     # Footer
-st.markdown("""
+    st.markdown("""
         <div style='text-align: center; color: #B3B3B3; margin-top: 50px;'>
             <p>Créé avec ❤️ en utilisant Streamlit et l'API Spotify</p>
             <p>🎵 Découvrez la musique à travers le temps</p>
         </div>
     """, unsafe_allow_html=True)
+
+# Point d'entrée
+if __name__ == "__main__":
+    main()
+
