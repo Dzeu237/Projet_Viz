@@ -655,27 +655,9 @@ def main():
     st.markdown("## 🕰️ Spotify Time Machine")
     st.markdown("### Explorez la musique à travers les décennies")
     
-    col1, col2 = st.columns(2)
+    year=st.slider("Sélectionnez la plage d'années", 1997,datetime.now().year() , (2000, 2020), step=1)
     
-    with col1:
-        start_year = st.slider(
-            "📅 Année de début",
-            min_value=1970,
-            max_value=datetime.now().year,
-            value=2013,
-            step=1
-        )
-    
-    with col2:
-        end_year = st.slider(
-            "📅 Année de fin",
-            min_value=start_year,
-            max_value=datetime.now().year,
-            value=2020,
-            step=1
-        )
-    
-    st.markdown(f"### 🔍 Recherche de **{start_year}** à **{end_year}**")
+    st.markdown(f"### 🔍 Recherche de **{year[0]}** à **{year[1]}**")
     
     # Bouton de recherche
     col_btn1, col_btn2, col_btn3 = st.columns([1, 2, 1])
@@ -688,8 +670,8 @@ def main():
         )
     
     if search_clicked:
-        with st.spinner(f"🔍 Recherche des albums de {start_year} à {end_year}..."):
-            albums = strategy_1_year_by_year(start_year, end_year)
+        with st.spinner(f"🔍 Recherche des albums de {year[0]} à {year[1]}..."):
+            albums = strategy_1_year_by_year(year[0], year[1])
             
             if albums:
                 st.success(f"✅ {len(albums)} albums trouvés!")
