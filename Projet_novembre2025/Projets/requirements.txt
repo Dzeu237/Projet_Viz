@@ -7,3 +7,7 @@ prince>=0.7.1
 humanize>=4.8.0
 pycountry
 datetime
+base64
+datetime
+time
+requests
