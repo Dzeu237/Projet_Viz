@@ -11,7 +11,6 @@ from datetime import datetime
 import time
 import pycountry
 from math import ceil
-import humanize
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -96,10 +95,30 @@ MUSIC_FEATURES = ['danceability', 'energy', 'loudness', 'speechiness',
 DATASET_URL = 'https://github.com/Dzeu237/Projet_Viz/blob/main/Projet_novembre2025/Projets/Data/Song/Scrobble_Features.csv?raw=true'
 
 # ============================================================================
+# UTILITY FUNCTIONS
+# ============================================================================
+
+def format_number(num):
+    """Format large numbers with K, M, B suffixes"""
+    if num >= 1_000_000_000:
+        return f"{num/1_000_000_000:.1f}B"
+    elif num >= 1_000_000:
+        return f"{num/1_000_000:.1f}M"
+    elif num >= 1_000:
+        return f"{num/1_000:.1f}K"
+    return str(num)
+
+def format_duration(ms):
+    """Format milliseconds to readable duration"""
+    seconds = ms // 1000
+    minutes = seconds // 60
+    secs = seconds % 60
+    return f"{minutes}:{secs:02d}"
+
+# ============================================================================
 # FONCTIONS API SPOTIFY
 # ============================================================================
 
-@st.cache_data
 def get_token():
     """
     Obtient un token d'accès Spotify via le flux Client Credentials.
@@ -108,12 +127,17 @@ def get_token():
     if "spotify_token" in st.session_state:
         return st.session_state.spotify_token
 
-    client_id = st.secrets.get("SPOTIFY_CLIENT_ID", "")
-    client_secret = st.secrets.get("SPOTIFY_SECRET_CODE", "")
+    # Check if running in Streamlit Cloud
+    try:
+        client_id = st.secrets.get("SPOTIFY_CLIENT_ID", "")
+        client_secret = st.secrets.get("SPOTIFY_SECRET_CODE", "")
+    except Exception:
+        st.error("⚠️ Configuration manquante: Veuillez configurer les secrets Spotify.")
+        st.stop()
     
     if not client_id or not client_secret:
         st.error("⚠️ Veuillez fournir les identifiants API Spotify dans les secrets Streamlit.")
-        return None
+        st.stop()
 
     auth_string = f"{client_id}:{client_secret}"
     auth_bytes = auth_string.encode("utf-8")
@@ -127,14 +151,14 @@ def get_token():
     data = {"grant_type": "client_credentials"}
 
     try:
-        response = post(url, headers=headers, data=data)
+        response = post(url, headers=headers, data=data, timeout=10)
         response.raise_for_status()
         token = response.json()["access_token"]
         st.session_state.spotify_token = token
         return token
     except exceptions.RequestException as e:
         st.error(f"Erreur lors de l'obtention du token Spotify: {e}")
-        return None
+        st.stop()
 
 
 def get_auth_header(token):
@@ -152,12 +176,12 @@ def search_albums(token, query, limit=50, offset=0):
         "limit": limit,
         "offset": offset
     }
-    response = get(url, headers=headers, params=params)
+    response = get(url, headers=headers, params=params, timeout=10)
     response.raise_for_status()
     return response.json()
 
 
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def strategy_1_year_by_year(start_year, end_year, genre=None):
     """
     Recherche d'albums année par année
@@ -208,7 +232,7 @@ def search_artist(artist_name):
     params = {"q": artist_name, "type": "artist", "limit": 1}
 
     try:
-        response = get(url, headers=headers, params=params)
+        response = get(url, headers=headers, params=params, timeout=10)
         response.raise_for_status()
         items = response.json().get("artists", {}).get("items", [])
         return items[0] if items else None
@@ -230,7 +254,7 @@ def get__songs_by_artist(artist_id, market='US'):
     params = {"market": market}
 
     try:
-        response = get(url, headers=headers, params=params)
+        response = get(url, headers=headers, params=params, timeout=10)
         response.raise_for_status()
         tracks = response.json().get("tracks", [])[:5]
         return tracks
@@ -329,7 +353,7 @@ def render_pagination(total_pages):
     # Bouton Précédent
     with col_pagination[0]:
         if st.session_state.current_page > 1:
-            if st.button("⬅️ Précédent", width='content'):
+            if st.button("⬅️ Précédent", key="prev_btn"):
                 go_to_page(st.session_state.current_page - 1)
                 st.rerun()
     
@@ -363,7 +387,7 @@ def render_pagination(total_pages):
     # Bouton Suivant
     with col_pagination[2]:
         if st.session_state.current_page < total_pages:
-            if st.button("Suivant ➡️", width='content'):
+            if st.button("Suivant ➡️", key="next_btn"):
                 go_to_page(st.session_state.current_page + 1)
                 st.rerun()
     
@@ -391,7 +415,7 @@ def render_album_card(album):
     
     with col1:
         if album["image_url"]:
-            st.image(album["image_url"], width='content')
+            st.image(album["image_url"], use_container_width=True)
     
     with col2:
         st.markdown(f"### {album['Album_Name']}")
@@ -454,11 +478,12 @@ def render_artist_info(artist_name, df_artist):
             image_url = artist_data.get("images", [{}])[0].get("url") if artist_data.get("images") else None
             
             if image_url:
-                st.image(image_url, caption=artist_data.get("name"), width='content')
+                st.image(image_url, caption=artist_data.get("name"), use_container_width=True)
             
             st.markdown(f"**Nom:** {artist_data.get('name')}")
             st.markdown(f"**Genres:** {', '.join(artist_data.get('genres', [])) or 'Non spécifié'}")
-            st.markdown(f"**Followers:** {humanize.metric(artist_data.get('followers', {}).get('total', 0))}")
+            followers = artist_data.get('followers', {}).get('total', 0)
+            st.markdown(f"**Followers:** {format_number(followers)}")
             st.markdown(f"**Popularité:** {artist_data.get('popularity', 0)}/100")
     
     with col2:
@@ -525,11 +550,11 @@ def render_top_songs(artist_name, artist_id):
                 
                 with cols[col_idx]:
                     if song["image"]:
-                        st.image(song["image"], width='content')
+                        st.image(song["image"], use_container_width=True)
                     
                     st.markdown(f"### {song['song_name']}")
                     st.markdown(f"**Album:** {song['album_name']}")
-                    st.markdown(f"**Durée:** {humanize.precisedelta(pd.to_timedelta(song['duration'], unit='ms'))}")
+                    st.markdown(f"**Durée:** {format_duration(song['duration'])}")
                     st.markdown(f"**Popularité:** {song['popularity']}/100")
                     st.markdown(f"**Track #:** {song['track_number']}")
 
@@ -537,7 +562,7 @@ def render_top_songs(artist_name, artist_id):
 # COMPOSANTS D'AFFICHAGE - RECOMMANDATIONS
 # ============================================================================
 
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def load_recommendation_data():
     """Charge et prépare les données pour les recommandations"""
     df = pd.read_csv(DATASET_URL, index_col=0)
@@ -594,7 +619,7 @@ def render_recommendations_tab():
         )
     
     # Bouton de recherche
-    if st.button("🔍 Trouver des chansons similaires", type="primary", width='content'):
+    if st.button("🔍 Trouver des chansons similaires", type="primary"):
         
         # Trouver l'ID de la chanson
         song_id = df[(df['Song'] == selected_song) & (df['Performer'] == selected_artist)].index[0]
@@ -617,12 +642,14 @@ def render_recommendations_tab():
                     with col_a:
                         st.markdown(f"### {idx}. {row['Song']}")
                         st.markdown(f"**Artiste:** {row['Performer']}")
-                        st.markdown(f"**Durée:** {humanize.precisedelta(pd.to_timedelta(row['spotify_track_duration_ms'], unit='ms'))}")
+                        duration_ms = row.get('spotify_track_duration_ms', 0)
+                        st.markdown(f"**Durée:** {format_duration(duration_ms)}")
                     
                     with col_b:
+                        popularity = row.get('spotify_track_popularity', 0)
                         st.metric(
                             label="Popularité",
-                            value=f"{row['spotify_track_popularity']}/100"
+                            value=f"{popularity}/100"
                         )
                     
                     st.divider()
@@ -655,7 +682,7 @@ def main():
     st.markdown("## 🕰️ Spotify Time Machine")
     st.markdown("### Explorez la musique à travers les décennies")
     
-    year=st.slider("Sélectionnez la plage d'années", 1997,datetime.now().year() , (2000, 2020), step=1)
+    year = st.slider("Sélectionnez la plage d'années", 1997, int(datetime.now().year()), (2000, 2020), step=1)
     
     st.markdown(f"### 🔍 Recherche de **{year[0]}** à **{year[1]}**")
     
@@ -666,7 +693,7 @@ def main():
         search_clicked = st.button(
             "🔍 Rechercher les Albums",
             type="primary",
-            width='content'
+            use_container_width=True
         )
     
     if search_clicked:
@@ -689,7 +716,7 @@ def main():
         
         # Créer les onglets
         tab1, tab2, tab3 = st.tabs([
-            "📀 Albums",
+            "💿 Albums",
             "🎤 Artistes",
             "🎵 Recommandations"
         ])
@@ -744,4 +771,3 @@ def main():
 # Point d'entrée
 if __name__ == "__main__":
     main()
-
