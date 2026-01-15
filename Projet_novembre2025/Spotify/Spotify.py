@@ -682,7 +682,8 @@ def main():
     st.markdown("## 🕰️ Spotify Time Machine")
     st.markdown("### Explorez la musique à travers les décennies")
     
-    year = st.slider("Sélectionnez la plage d'années", 1997, int(datetime.now().year()), (2000, 2020), step=1)
+    current_year = datetime.now().year
+    year = st.slider("Sélectionnez la plage d'années", 1997, current_year, (2000, 2020), step=1)
     
     st.markdown(f"### 🔍 Recherche de **{year[0]}** à **{year[1]}**")
     
